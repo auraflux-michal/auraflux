@@ -1,0 +1,53 @@
+---
+interface Item {
+  q: string;
+  a: string;
+}
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<section class="wrap py-[110px] pb-[90px]">
+  <p class="mb-6 font-body text-[13px] text-ink-3">faq</p>
+  <h2 class="mb-[60px] font-sans text-[clamp(40px,5.6vw,76px)] font-medium leading-[1.02] tracking-[-0.035em] text-ink">
+    Klienci pytają<span class="font-serif font-normal italic">.</span>
+  </h2>
+  <div class="faq-list border-t border-line">
+    {items.map((item) => (
+      <div class="faq-item border-b border-line">
+        <button class="faq-q flex w-full items-center justify-between gap-6 py-[26px] px-1 text-left font-sans text-[17px] font-medium tracking-[-0.005em] text-ink">
+          {item.q}
+          <span class="faq-plus w-[18px] text-center text-[22px] leading-none text-ink transition-transform duration-300">+</span>
+        </button>
+        <div class="faq-a overflow-hidden font-body text-[15px] leading-[1.6] text-ink-2 [max-height:0] transition-[max-height] duration-350">
+          <div class="max-w-[760px] px-1 pb-[26px]">{item.a}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a') as HTMLElement | null;
+    const plus = item.querySelector('.faq-plus') as HTMLElement | null;
+    if (!q || !a) return;
+    q.addEventListener('click', () => {
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach((o) => {
+        o.classList.remove('open');
+        (o.querySelector('.faq-a') as HTMLElement).style.maxHeight = '0px';
+        const op = o.querySelector('.faq-plus') as HTMLElement | null;
+        if (op) op.style.transform = 'rotate(0deg)';
+      });
+      if (!open) {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+        if (plus) plus.style.transform = 'rotate(45deg)';
+      }
+    });
+  });
+</script>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  tag: string;
+  lead: string;
+}
+const { tag, lead } = Astro.props;
+---
+
+<section class="wrap pb-[90px] pt-10">
+  <span class="mb-[30px] inline-block font-body text-[13px] text-ink-3">{tag}</span>
+  <div class="grid items-end gap-[34px] min-[981px]:grid-cols-[1.3fr_0.9fr] min-[981px]:gap-20">
+    <h1 class="m-0 font-sans text-[clamp(52px,8vw,108px)] font-medium leading-[0.96] tracking-[-0.04em] text-ink [&_.it]:font-serif [&_.it]:font-normal [&_.it]:italic [&_.it]:tracking-[-0.02em]">
+      <slot />
+    </h1>
+    <div class="flex max-w-none flex-col gap-[30px] pb-[10px] min-[981px]:ml-auto min-[981px]:max-w-[380px]">
+      <p class="font-body text-lg leading-[1.55] text-ink-2">{lead}</p>
+      <div class="flex items-center gap-[22px]">
+        <slot name="actions" />
+      </div>
+    </div>
+  </div>
+</section>

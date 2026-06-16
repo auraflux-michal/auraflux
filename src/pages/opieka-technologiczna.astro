@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Shero from '../components/Shero.astro';
+import LinkUl from '../components/LinkUl.astro';
+import ImageBand from '../components/ImageBand.astro';
+import StatsRow from '../components/StatsRow.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import FeatSection from '../components/FeatSection.astro';
+import SplitSection from '../components/SplitSection.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PriceGrid from '../components/PriceGrid.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { safeFetch } from '../lib/sanity';
+
+const query = `*[_type == "servicePage" && slug.current == "opieka-technologiczna"][0]{
+  stats[]{n, l},
+  process{eyebrow, lead, steps[]{num, t, d}},
+  feats[]{ico, h3, p},
+  pricing[]{pk, amt, unit, pd, items, buyText, featured}
+}`;
+
+const fallback = {
+  stats: [
+    { n: '99,9%', l: 'gwarantowany uptime infrastruktury' },
+    { n: '<5 dni', l: 'na pełne przejęcie projektu' },
+    { n: '24/7', l: 'monitoring dostępności i błędów' },
+    { n: '30 min', l: 'czas reakcji w sprawach krytycznych' },
+  ],
+  process: {
+    eyebrow: 'jak pracujemy',
+    lead: 'Bierzemy na siebie całe zaplecze techniczne. Ty dostajesz przejrzysty raport i jeden kontakt, do którego piszesz, gdy coś się dzieje.',
+    steps: [
+      { num: '01', t: 'Audyt i przejęcie', d: 'Przegląd hostingu, domen, kodu i bezpieczeństwa. Porządkujemy dostępy i dokumentujemy stan startowy.' },
+      { num: '02', t: 'Zabezpieczenie', d: 'Backupy, certyfikaty SSL, zapory i aktualizacje. Eliminujemy znane podatności.' },
+      { num: '03', t: 'Monitoring', d: 'Całodobowy monitoring uptime i wydajności. Reagujemy, zanim zauważy to Twój klient.' },
+      { num: '04', t: 'Rozwój', d: 'Drobne zmiany, optymalizacje i wsparcie rozwoju w ramach miesięcznej puli godzin.' },
+    ],
+  },
+  feats: [
+    { ico: '⟲', h3: 'Backupy', p: 'Automatyczne kopie zapasowe z szybkim przywracaniem na żądanie.' },
+    { ico: '🔒', h3: 'Bezpieczeństwo & SSL', p: 'Certyfikaty, zapory i audyty podatności na bieżąco.' },
+    { ico: '↑', h3: 'Aktualizacje', p: 'CMS, wtyczki i biblioteki zawsze w aktualnej, bezpiecznej wersji.' },
+    { ico: '◉', h3: 'Monitoring uptime', p: 'Całodobowy nadzór dostępności z alertami i czasem reakcji.' },
+    { ico: '▤', h3: 'Hosting & domeny', p: 'Zarządzamy infrastrukturą, odnowieniami i konfiguracją DNS.' },
+    { ico: '§', h3: 'Raport miesięczny', p: 'Przejrzyste podsumowanie prac, zdarzeń i rekomendacji.' },
+  ],
+  pricing: [
+    { pk: 'Start', amt: '390', unit: 'zł / mc', pd: 'Dla prostych stron wizytówek i landing page.', items: ['Backupy tygodniowe', 'Aktualizacje co miesiąc', 'Monitoring uptime', '2 h zmian w miesiącu'], buyText: 'Wybieram Start' },
+    { pk: 'Pro', amt: '790', unit: 'zł / mc', pd: 'Dla firmowych stron i sklepów wymagających ciągłości.', items: ['Backupy dzienne', 'Aktualizacje co tydzień', 'Monitoring 24/7 + alerty', '6 h zmian w miesiącu'], buyText: 'Wybieram Pro', featured: true },
+    { pk: 'Enterprise', amt: 'indywidualnie', pd: 'Dla platform i serwisów o krytycznym znaczeniu.', items: ['SLA i czas reakcji na miarę', 'Środowisko testowe', 'Dedykowany zespół', 'Pula godzin na rozwój'], buyText: 'Porozmawiajmy' },
+  ],
+};
+
+const data = await safeFetch(query, fallback);
+---
+
+<Layout title="Opieka technologiczna — auraflux" description="Opieka technologiczna — auraflux. Hosting, domeny, aktualizacje i bezpieczeństwo — pilnujemy wszystkiego." active="uslugi">
+  <Breadcrumb parentLabel="usługi" parentHref="/#uslugi" current="opieka technologiczna" />
+
+  <Shero tag="usługa 03 — opieka technologiczna" lead="Hosting, domeny, aktualizacje i bezpieczeństwo — pilnujemy wszystkiego, aby Twój projekt działał bez zakłóceń, a Ty miał spokój i czas na własne pasje.">
+    Twój projekt<br />pod stałą <span class="it">opieką</span>
+    <Fragment slot="actions">
+      <LinkUl href="#pakiety" arrow="↓">zobacz plany</LinkUl>
+      <LinkUl href="#kontakt">porozmawiajmy</LinkUl>
+    </Fragment>
+  </Shero>
+
+  <ImageBand label="Dashboard monitoringu / panel opieki" />
+
+  <section class="wrap pt-16">
+    <StatsRow stats={data.stats} />
+  </section>
+
+  <ProcessSection eyebrow={data.process.eyebrow} lead={data.process.lead} steps={data.process.steps}>
+    Przejmujemy<br />i <span class="it">pilnujemy</span>
+  </ProcessSection>
+
+  <FeatSection eyebrow="co obejmuje opieka" feats={data.feats}>
+    Spokój w jednym<br />abonamencie
+  </FeatSection>
+
+  <section class="wrap pb-12">
+    <SplitSection
+      reverse
+      imageLabel="Raport miesięczny / statystyki"
+      heading="Jeden kontakt zamiast pięciu dostawców"
+      paragraph="Koniec z żonglowaniem hostingiem, programistą i firmą od domen. Przejmujemy komunikację z dostawcami i odpowiadamy za całość."
+      items={['Dedykowany opiekun projektu', 'Priorytetowy kanał zgłoszeń', 'Comiesięczny raport i rekomendacje']}
+    />
+  </section>
+
+  <section id="pakiety" class="wrap pb-20">
+    <SectionHeading eyebrow="plany opieki">Stała opieka<br />w abonamencie</SectionHeading>
+    <PriceGrid tiers={data.pricing} />
+  </section>
+
+  <LeadMagnet
+    heading="Zanim zlecisz opiekę —"
+    headingItalic="12 rzeczy"
+    headingRest="które musisz wiedzieć"
+    paragraph="Praktyczny PDF o tym, jak ocenić bezpieczeństwo i niezawodność swojego projektu oraz czego wymagać od firmy opiekuńczej."
+    bullets={['Checklista bezpieczeństwa strony', 'Co powinno być w umowie SLA', '7 pytań, które rozbroją każdą agencję']}
+  />
+
+  <ContactSection linkText="Napisz do nas" rest=", a przejmiemy techniczne zaplecze, byś mógł działać w spokoju." />
+</Layout>

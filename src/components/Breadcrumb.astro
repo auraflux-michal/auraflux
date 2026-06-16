@@ -1,0 +1,14 @@
+---
+interface Props {
+  parentLabel: string;
+  parentHref: string;
+  current: string;
+}
+const { parentLabel, parentHref, current } = Astro.props;
+---
+
+<div class="wrap">
+  <div class="pt-[46px] font-body text-[13px] text-ink-3">
+    <a class="hover:text-ink" href={parentHref}>{parentLabel}</a> / <span class="text-ink">{current}</span>
+  </div>
+</div>

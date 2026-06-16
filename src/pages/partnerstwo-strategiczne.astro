@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Shero from '../components/Shero.astro';
+import LinkUl from '../components/LinkUl.astro';
+import ImageBand from '../components/ImageBand.astro';
+import StatsRow from '../components/StatsRow.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import FeatSection from '../components/FeatSection.astro';
+import SplitSection from '../components/SplitSection.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PriceGrid from '../components/PriceGrid.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { safeFetch } from '../lib/sanity';
+
+const query = `*[_type == "servicePage" && slug.current == "partnerstwo-strategiczne"][0]{
+  stats[]{n, l},
+  process{eyebrow, lead, steps[]{num, t, d}},
+  feats[]{ico, h3, p},
+  pricing[]{pk, amt, unit, pd, items, buyText, featured}
+}`;
+
+const fallback = {
+  stats: [
+    { n: '3 lata', l: 'średni czas współpracy z partnerem' },
+    { n: '25+', l: 'wdrożonych integracji i automatyzacji' },
+    { n: '1 zespół', l: 'design, technologia i strategia w jednym' },
+    { n: 'kwartalnie', l: 'przegląd celów i roadmapy' },
+  ],
+  process: {
+    eyebrow: 'jak pracujemy',
+    lead: 'Nie znikamy po wdrożeniu. Stajemy się przedłużeniem Twojego zespołu — planujemy, integrujemy i optymalizujemy długofalowo.',
+    steps: [
+      { num: '01', t: 'Diagnoza', d: 'Audyt procesów, narzędzi i wąskich gardeł. Określamy, co naprawdę hamuje wzrost.' },
+      { num: '02', t: 'Roadmapa', d: 'Priorytetyzowany plan działań na kwartały, z jasnymi celami i miarami sukcesu.' },
+      { num: '03', t: 'Integracje', d: 'Łączymy systemy, automatyzujemy powtarzalne zadania i porządkujemy dane.' },
+      { num: '04', t: 'Optymalizacja', d: 'Cyklicznie mierzymy, testujemy i poprawiamy. Wzrost staje się procesem, nie zrywem.' },
+    ],
+  },
+  feats: [
+    { ico: '◇', h3: 'Strategia cyfrowa', p: 'Kierunek rozwoju, priorytety i decyzje technologiczne.' },
+    { ico: '⇄', h3: 'Integracje systemów', p: 'CRM, ERP, płatności i narzędzia połączone w jeden organizm.' },
+    { ico: '⚙', h3: 'Automatyzacja', p: 'Eliminujemy powtarzalną, ręczną pracę w procesach.' },
+    { ico: '▦', h3: 'Dane i analityka', p: 'Porządek w danych i dashboardy, które wspierają decyzje.' },
+    { ico: '◷', h3: 'Planowanie projektów', p: 'Roadmapy, priorytety i koordynacja wdrożeń.' },
+    { ico: '↗', h3: 'Optymalizacja wzrostu', p: 'Testy, iteracje i mierzalne usprawnienia.' },
+  ],
+  pricing: [
+    { pk: 'Doradztwo', amt: '2 500', unit: 'zł / mc', pd: 'Regularne konsultacje strategiczne i kierunek rozwoju.', items: ['Sesja strategiczna co miesiąc', 'Priorytetyzacja działań', 'Wsparcie e-mail', 'Przegląd kwartalny'], buyText: 'Wybieram doradztwo' },
+    { pk: 'Partner', amt: 'od 6 000', unit: 'zł / mc', pd: 'Stałe partnerstwo z dedykowanym zespołem i realizacją.', items: ['Roadmapa i koordynacja', 'Integracje i automatyzacje', 'Pula godzin wdrożeniowych', 'Dashboardy i raporty'], buyText: 'Zostańmy partnerami', featured: true },
+    { pk: 'Scale', amt: 'indywidualnie', pd: 'Pełne wsparcie wzrostu dla dojrzałych organizacji.', items: ['Dedykowany zespół interdyscyplinarny', 'Cele i KPI w umowie', 'Wsparcie zarządu', 'Priorytet realizacji'], buyText: 'Porozmawiajmy' },
+  ],
+};
+
+const data = await safeFetch(query, fallback);
+---
+
+<Layout title="Partnerstwo strategiczne — auraflux" description="Partnerstwo strategiczne — auraflux. Integracja systemów, planowanie projektów i optymalizacja procesów." active="uslugi">
+  <Breadcrumb parentLabel="usługi" parentHref="/#uslugi" current="partnerstwo strategiczne" />
+
+  <Shero tag="usługa 04 — partnerstwo strategiczne" lead="Integracja systemów, planowanie projektów i optymalizacja procesów. Twój biznes rozwija się w harmonii z wizją i technologią — a my jesteśmy obok na każdym etapie.">
+    Strategiczny<br />partner Twojego <span class="it">wzrostu</span>
+    <Fragment slot="actions">
+      <LinkUl href="#model" arrow="↓">model współpracy</LinkUl>
+      <LinkUl href="#kontakt">porozmawiajmy</LinkUl>
+    </Fragment>
+  </Shero>
+
+  <ImageBand label="Roadmapa / sesja strategiczna" />
+
+  <section class="wrap pt-16">
+    <StatsRow stats={data.stats} />
+  </section>
+
+  <ProcessSection eyebrow={data.process.eyebrow} lead={data.process.lead} steps={data.process.steps}>
+    Rozwój<br />w <span class="it">harmonii</span>
+  </ProcessSection>
+
+  <FeatSection eyebrow="obszary wsparcia" feats={data.feats}>
+    Partner od strategii<br />po wdrożenie
+  </FeatSection>
+
+  <section class="wrap pb-12">
+    <SplitSection
+      reverse
+      imageLabel="Tablica roadmapy / warsztat"
+      heading="Przedłużenie Twojego zespołu, nie kolejny dostawca"
+      paragraph="Wchodzimy głęboko w Twój biznes i myślimy jego kategoriami. Dzielimy się odpowiedzialnością za cele, nie tylko za zadania."
+      items={['Stały zespół przypisany do firmy', 'Wspólne cele i miary sukcesu', 'Regularne przeglądy strategiczne']}
+    />
+  </section>
+
+  <section id="model" class="wrap pb-20">
+    <SectionHeading eyebrow="model współpracy">Wybierz poziom<br />zaangażowania</SectionHeading>
+    <PriceGrid tiers={data.pricing} />
+  </section>
+
+  <LeadMagnet
+    heading="Zanim wybierzesz partnera —"
+    headingItalic="12 rzeczy"
+    headingRest="które musisz wiedzieć"
+    paragraph="Praktyczny PDF o tym, jak budować długofalową współpracę technologiczno-strategiczną i jak mierzyć jej realny wpływ na biznes."
+    bullets={['Jak ustawić wspólne cele i KPI', 'Modele rozliczeń i ich pułapki', '7 pytań, które rozbroją każdą agencję']}
+  />
+
+  <ContactSection linkText="Napisz do nas" rest=", a zostaniemy partnerem, który realnie odpowiada za Twój wzrost." />
+</Layout>

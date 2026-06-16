@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Shero from '../components/Shero.astro';
+import LinkUl from '../components/LinkUl.astro';
+import ImageBand from '../components/ImageBand.astro';
+import StatsRow from '../components/StatsRow.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import FeatSection from '../components/FeatSection.astro';
+import SplitSection from '../components/SplitSection.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PriceGrid from '../components/PriceGrid.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { safeFetch } from '../lib/sanity';
+
+const query = `*[_type == "servicePage" && slug.current == "branding"][0]{
+  stats[]{n, l},
+  process{eyebrow, lead, steps[]{num, t, d}},
+  feats[]{ico, h3, p},
+  pricing[]{pk, amt, unit, pd, items, buyText, featured}
+}`;
+
+const fallback = {
+  stats: [
+    { n: '40+', l: 'zbudowanych i odświeżonych marek' },
+    { n: '4–6 tyg', l: 'średni czas realizacji identyfikacji' },
+    { n: '100%', l: 'przekazujemy pliki źródłowe i prawa' },
+    { n: '12 lat', l: 'doświadczenia zespołu w designie' },
+  ],
+  process: {
+    eyebrow: 'jak pracujemy',
+    lead: 'Proces jest przejrzysty i oparty na decyzjach, nie na zgadywaniu. Każdy etap kończy się konkretnym, akceptowalnym efektem.',
+    steps: [
+      { num: '01', t: 'Odkrycie i strategia', d: 'Warsztat, analiza konkurencji i grupy docelowej. Definiujemy pozycjonowanie, archetyp marki i fundament komunikacji.' },
+      { num: '02', t: 'Kierunek wizualny', d: 'Moodboardy i 2–3 kierunki kreatywne. Wybieramy język wizualny, który najlepiej oddaje charakter marki.' },
+      { num: '03', t: 'System identyfikacji', d: 'Logo, sygnet, typografia, kolorystyka, key visual i zasady użycia — pełen, elastyczny system.' },
+      { num: '04', t: 'Wdrożenie i księga znaku', d: 'Szablony, materiały i brandbook. Przekazujemy pliki źródłowe i wdrażamy markę we wszystkich punktach styku.' },
+    ],
+  },
+  feats: [
+    { ico: 'Aa', h3: 'Logo i sygnet', p: 'Główny znak, sygnet, warianty mono i zasady minimalnych rozmiarów.' },
+    { ico: '◐', h3: 'Kolor i typografia', p: 'Paleta podstawowa i uzupełniająca, kroje pisma i hierarchia tekstu.' },
+    { ico: '§', h3: 'Księga znaku', p: 'Brandbook z zasadami użycia, polami ochronnymi i przykładami.' },
+    { ico: '✶', h3: 'Key visual', p: 'Spójny motyw przewodni do kampanii, social mediów i materiałów.' },
+    { ico: '▤', h3: 'Szablony', p: 'Wizytówki, prezentacje, posty i stories gotowe do edycji.' },
+    { ico: '"', h3: 'Strategia komunikacji', p: 'Ton głosu, claim i kluczowe komunikaty marki.' },
+  ],
+  pricing: [
+    { pk: 'Refresh', amt: '8 000', unit: 'zł', pd: 'Odświeżenie istniejącej marki bez utraty rozpoznawalności.', items: ['Redesign logo i sygnetu', 'Aktualizacja palety i typografii', 'Mini-brandbook (PDF)', 'Pliki źródłowe'], buyText: 'Wybieram refresh' },
+    { pk: 'Studio', amt: '16 000', unit: 'zł', pd: 'Pełna identyfikacja dla marek, które startują na poważnie.', items: ['Strategia i pozycjonowanie', 'Logo + system wizualny', 'Key visual i szablony', 'Księga znaku'], buyText: 'Wybieram studio', featured: true },
+    { pk: 'Pełny rebranding', amt: 'od 28 000', unit: 'zł', pd: 'Kompleksowa transformacja marki i wdrożenie w punktach styku.', items: ['Wszystko z pakietu Studio', 'Naming i strategia komunikacji', 'Materiały marketingowe', 'Wdrożenie na stronie i social'], buyText: 'Porozmawiajmy' },
+  ],
+};
+
+const data = await safeFetch(query, fallback);
+---
+
+<Layout title="Branding — auraflux" description="Branding — auraflux. Budujemy marki od podstaw i odświeżamy istniejące. Strategia, identyfikacja wizualna i komunikacja." active="uslugi">
+  <Breadcrumb parentLabel="usługi" parentHref="/#uslugi" current="branding" />
+
+  <Shero tag="usługa 01 — branding" lead="Budujemy marki od podstaw i odświeżamy istniejące. Strategia, identyfikacja wizualna i komunikacja — spójnie, autentycznie, premium.">
+    Marki, które<br />zostają <span class="it">w głowie</span>
+    <Fragment slot="actions">
+      <LinkUl href="#pakiety" arrow="↓">zobacz pakiety</LinkUl>
+      <LinkUl href="#kontakt">porozmawiajmy</LinkUl>
+    </Fragment>
+  </Shero>
+
+  <ImageBand label="Główna grafika brandingu (key visual / moodboard)" />
+
+  <section class="wrap pt-16">
+    <StatsRow stats={data.stats} />
+  </section>
+
+  <ProcessSection eyebrow={data.process.eyebrow} lead={data.process.lead} steps={data.process.steps}>
+    Od insightu do<br /><span class="it">spójnej</span> marki
+  </ProcessSection>
+
+  <FeatSection eyebrow="co otrzymujesz" feats={data.feats}>
+    Kompletny pakiet<br />identyfikacji
+  </FeatSection>
+
+  <section class="wrap pb-12">
+    <SplitSection
+      reverse
+      imageLabel="Strategia / moodboard"
+      heading="Strategia, zanim powstanie pierwszy piksel"
+      paragraph="Dobra identyfikacja zaczyna się od decyzji biznesowych. Najpierw rozumiemy, gdzie marka chce być za 3 lata — potem dobieramy formę."
+      items={['Pozycjonowanie i archetyp marki', 'Analiza konkurencji i niszy', 'Mapa komunikacji i ton głosu']}
+    />
+  </section>
+
+  <section id="pakiety" class="wrap pb-20">
+    <SectionHeading eyebrow="pakiety">Wybierz zakres<br />współpracy</SectionHeading>
+    <PriceGrid tiers={data.pricing} />
+  </section>
+
+  <LeadMagnet
+    heading="Zanim zlecisz branding —"
+    headingItalic="12 rzeczy"
+    headingRest="które musisz wiedzieć"
+    paragraph="Praktyczny PDF, który przeprowadzi Cię przez briefing, budżet i pułapki współpracy z agencją. Oszczędź tygodnie i tysiące złotych jeszcze przed startem projektu."
+    bullets={['Checklista briefu na 1 stronę A4', 'Realne widełki budżetów 2026', '7 pytań, które rozbroją każdą agencję']}
+  />
+
+  <ContactSection linkText="Napisz do nas" rest=", a zbudujemy markę, którą Twoi klienci zapamiętają." />
+</Layout>

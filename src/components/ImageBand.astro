@@ -1,0 +1,12 @@
+---
+import PlaceholderImage from './PlaceholderImage.astro';
+
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<section class="wrap mt-[10px]">
+  <PlaceholderImage label={label} class="h-[clamp(280px,42vw,560px)] w-full" bg="#eeeae3" />
+</section>

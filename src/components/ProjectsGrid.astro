@@ -1,0 +1,53 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import PlaceholderImage from './PlaceholderImage.astro';
+
+interface Project {
+  title: string;
+  sub: string;
+  href: string;
+  bg: string;
+}
+interface Props {
+  tall: Project[];
+  row: Project;
+}
+const { tall, row } = Astro.props;
+---
+
+<section id="projekty" class="wrap py-20">
+  <SectionHeading eyebrow="projekty">Podróże od wizji do ożywienia<br />marki</SectionHeading>
+
+  <div class="mt-14 grid grid-cols-1 gap-7 min-[981px]:grid-cols-2">
+    {tall.map((p) => (
+      <a class="block" href={p.href}>
+        <div class="relative flex aspect-[4/3.05] items-center justify-center overflow-hidden rounded-[6px]" style={`background:${p.bg}`}>
+          <PlaceholderImage label={`Grafika projektu — ${p.title}`} class="absolute inset-0 h-full w-full border-0" bg={p.bg} />
+        </div>
+        <div class="mt-[18px]">
+          <div class="font-sans text-[22px] font-medium tracking-[-0.01em] text-ink">{p.title}</div>
+          <div class="mt-[6px] font-body text-[13px] text-ink-3">{p.sub}</div>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <div class="mt-7 grid grid-cols-1 gap-7 min-[981px]:grid-cols-2">
+    <a class="block" href={row.href}>
+      <div class="relative flex aspect-[4/3.05] items-center justify-center overflow-hidden rounded-[6px]" style={`background:${row.bg}`}>
+        <PlaceholderImage label={`Grafika projektu — ${row.title}`} class="absolute inset-0 h-full w-full border-0" bg={row.bg} />
+      </div>
+      <div class="mt-[18px]">
+        <div class="font-sans text-[22px] font-medium tracking-[-0.01em] text-ink">{row.title}</div>
+        <div class="mt-[6px] font-body text-[13px] text-ink-3">{row.sub}</div>
+      </div>
+    </a>
+
+    <div class="flex min-h-full flex-col justify-between rounded-[6px] bg-dark p-9 text-white">
+      <h3 class="m-0 font-sans text-[34px] font-medium leading-[1.05] tracking-[-0.02em] text-white">Dołącz do<br />zadowolonych<br />partnerów</h3>
+      <a href="#kontakt" class="mt-7 inline-flex items-center gap-2 self-start border-b border-white pb-1 font-sans text-sm text-white transition-[gap] hover:gap-[14px]">
+        Umów konsultację <span>↗</span>
+      </a>
+    </div>
+  </div>
+</section>

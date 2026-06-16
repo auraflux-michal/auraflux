@@ -1,0 +1,83 @@
+---
+import PlaceholderImage from './PlaceholderImage.astro';
+
+interface Props {
+  heading: string;
+  headingItalic: string;
+  headingRest: string;
+  paragraph: string;
+  bullets: string[];
+  topPadding?: boolean;
+}
+const { heading, headingItalic, headingRest, paragraph, bullets, topPadding = false } = Astro.props;
+---
+
+<section class={`wrap ${topPadding ? 'pt-10' : 'pt-[30px]'} pb-[10px]`}>
+  <div class="grid overflow-hidden rounded-[6px] border border-line bg-canvas-2 min-[981px]:grid-cols-[1.15fr_0.85fr]">
+    <div class="px-7 py-10 min-[981px]:px-[52px] min-[981px]:py-14">
+      <p class="mb-[22px] font-body text-[13px] text-ink-3">bezpłatny przewodnik</p>
+      <h2 class="mb-[18px] font-sans text-[clamp(30px,3.6vw,46px)] font-medium leading-[1.04] tracking-[-0.03em] text-ink">
+        {heading} <span class="font-serif font-normal italic">{headingItalic}</span>, {headingRest}
+      </h2>
+      <p class="mb-[26px] max-w-[430px] font-body text-base leading-[1.6] text-ink-2">{paragraph}</p>
+      <ul class="mb-8 flex flex-col gap-3">
+        {bullets.map((b) => (
+          <li class="flex items-baseline gap-3 font-sans text-[15px] text-ink before:font-bold before:text-accent before:content-['✓']">{b}</li>
+        ))}
+      </ul>
+      <form id="lead-magnet-form" class="flex max-w-[420px] flex-col gap-3" aria-label="Pobierz bezpłatny przewodnik">
+        <label for="lm-name" class="sr-only">Imię</label>
+        <input id="lm-name" type="text" name="name" placeholder="Imię" required class="h-[50px] border border-line-2 bg-white px-4 font-body text-[15px] text-ink-2 outline-none transition-shadow focus:border-accent focus:shadow-[0_0_0_3px_rgba(30,115,190,0.1)]" />
+        <label for="lm-email" class="sr-only">Adres e-mail</label>
+        <input id="lm-email" type="email" name="email" placeholder="Adres e-mail" required class="h-[50px] border border-line-2 bg-white px-4 font-body text-[15px] text-ink-2 outline-none transition-shadow focus:border-accent focus:shadow-[0_0_0_3px_rgba(30,115,190,0.1)]" />
+        <button type="submit" class="inline-flex h-[50px] items-center justify-center gap-2 rounded-[6px] bg-dark font-sans text-[15px] font-medium text-white transition hover:-translate-y-px hover:bg-black">
+          Pobierz przewodnik <span>↗</span>
+        </button>
+        <p id="lead-magnet-status" class="mt-1 font-body text-xs leading-[1.4] text-ink-3" role="status" aria-live="polite">
+          Zero spamu. Wypiszesz się jednym kliknięciem. Administratorem danych jest auraflux.
+        </p>
+      </form>
+    </div>
+    <div class="relative hidden items-center justify-center bg-[#e7e3db] p-11 min-[981px]:flex">
+      <span class="absolute right-[22px] top-[22px] rounded-full bg-ink px-[14px] py-[7px] font-sans text-xs font-medium text-white">PDF · 18 stron</span>
+      <PlaceholderImage label="Okładka przewodnika" class="h-[86%] w-[78%] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.5)]" bg="#dad6cd" />
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('lead-magnet-form') as HTMLFormElement | null;
+  const status = document.getElementById('lead-magnet-status');
+  const defaultStatus = status?.textContent ?? '';
+  if (form && status) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = (form.elements.namedItem('name') as HTMLInputElement)?.value.trim();
+      const email = (form.elements.namedItem('email') as HTMLInputElement)?.value.trim();
+      const button = form.querySelector('button') as HTMLButtonElement;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !name) {
+        status.textContent = 'Podaj imię i poprawny adres e-mail.';
+        return;
+      }
+      button.disabled = true;
+      try {
+        const res = await fetch('/api/lead-magnet', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email }),
+        });
+        const data = await res.json();
+        if (res.ok && data.ok) {
+          button.textContent = 'Wysłaliśmy PDF na e-mail ✓';
+          status.textContent = defaultStatus;
+        } else {
+          button.disabled = false;
+          status.textContent = data.message || 'Coś poszło nie tak. Spróbuj ponownie.';
+        }
+      } catch {
+        button.disabled = false;
+        status.textContent = 'Coś poszło nie tak. Spróbuj ponownie.';
+      }
+    });
+  }
+</script>

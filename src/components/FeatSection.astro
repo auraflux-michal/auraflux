@@ -1,0 +1,29 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Feat {
+  ico: string;
+  h3: string;
+  p: string;
+}
+interface Props {
+  eyebrow: string;
+  feats: Feat[];
+}
+const { eyebrow, feats } = Astro.props;
+---
+
+<section class="wrap pb-20">
+  <SectionHeading eyebrow={eyebrow}>
+    <slot />
+  </SectionHeading>
+  <div class="mt-[52px] grid grid-cols-1 gap-px border border-line bg-line min-[981px]:grid-cols-3">
+    {feats.map((f) => (
+      <div class="flex min-h-[230px] flex-col bg-white p-[30px] py-[38px]">
+        <div class="mb-auto font-serif text-3xl italic leading-none text-ink">{f.ico}</div>
+        <h3 class="mb-[10px] mt-[26px] font-sans text-xl font-medium tracking-[-0.01em] text-ink">{f.h3}</h3>
+        <p class="m-0 font-body text-sm leading-[1.55] text-ink-2">{f.p}</p>
+      </div>
+    ))}
+  </div>
+</section>

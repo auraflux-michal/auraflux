@@ -1,0 +1,35 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Step {
+  num: string;
+  t: string;
+  d: string;
+}
+interface Props {
+  eyebrow: string;
+  lead: string;
+  steps: Step[];
+}
+const { eyebrow, lead, steps } = Astro.props;
+---
+
+<section class="wrap py-20">
+  <div class="mb-[18px] grid items-end gap-6 min-[981px]:grid-cols-[1.3fr_0.9fr] min-[981px]:gap-20">
+    <div>
+      <SectionHeading eyebrow={eyebrow}>
+        <slot />
+      </SectionHeading>
+    </div>
+    <p class="max-w-none font-body text-base leading-[1.6] text-ink-2 min-[981px]:ml-auto min-[981px]:max-w-[360px]">{lead}</p>
+  </div>
+  <div class="mt-10 border-t border-line">
+    {steps.map((s) => (
+      <div class="grid grid-cols-[60px_1fr] items-start gap-[18px] border-b border-line py-10 min-[981px]:grid-cols-[120px_1fr_1.1fr] min-[981px]:gap-8">
+        <div class="font-serif text-[40px] italic leading-none text-ink">{s.num}</div>
+        <div class="font-sans text-2xl font-medium leading-[1.1] tracking-[-0.02em] text-ink min-[981px]:text-[26px]">{s.t}</div>
+        <div class="col-span-2 max-w-[460px] pl-[78px] font-body text-[15px] leading-[1.6] text-ink-2 min-[981px]:col-span-1 min-[981px]:pl-0">{s.d}</div>
+      </div>
+    ))}
+  </div>
+</section>

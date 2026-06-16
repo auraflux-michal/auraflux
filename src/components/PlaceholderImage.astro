@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  label: string;
+  image?: ImageMetadata;
+  alt?: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  bg?: string;
+}
+
+const { label, image, alt = label, width = 1200, height = 800, class: className = '', bg = '#eeeae3' } = Astro.props;
+---
+
+{
+  image ? (
+    <Image src={image} alt={alt} width={width} height={height} class={className} />
+  ) : (
+    <div
+      role="img"
+      aria-label={label}
+      class={`flex items-center justify-center rounded-[6px] border border-dashed border-line-2 text-center font-body text-sm text-ink-3 ${className}`}
+      style={`background:${bg}`}
+    >
+      {label}
+    </div>
+  )
+}

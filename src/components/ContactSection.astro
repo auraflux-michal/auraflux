@@ -1,0 +1,16 @@
+---
+interface Props {
+  linkText: string;
+  rest: string;
+}
+const { linkText, rest } = Astro.props;
+---
+
+<section id="kontakt" class="mt-[60px] bg-dark py-[120px] pb-[130px] text-white">
+  <div class="wrap">
+    <p class="mb-6 font-body text-[13px] text-ink-3">kontakt</p>
+    <h2 class="max-w-[1080px] font-sans text-[clamp(40px,5.8vw,80px)] font-medium leading-[1.05] tracking-[-0.035em] text-white">
+      <a href="mailto:czesc@auraflux.pl" class="cursor-pointer border-b-2 border-white pb-[2px]">{linkText}</a> {rest}
+    </h2>
+  </div>
+</section>

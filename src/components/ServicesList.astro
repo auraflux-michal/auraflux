@@ -1,0 +1,31 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Service {
+  num: string;
+  name: string;
+  desc: string;
+  href: string;
+}
+interface Props {
+  services: Service[];
+}
+const { services } = Astro.props;
+---
+
+<section id="uslugi" class="wrap py-20">
+  <SectionHeading eyebrow="usługi">Kreujemy Twój<br />świat technologii</SectionHeading>
+  <div class="mt-14 border-t border-line">
+    {services.map((s) => (
+      <a
+        href={s.href}
+        class="grid grid-cols-[48px_1fr] items-start gap-4 border-b border-line py-[34px] text-inherit transition-[padding] hover:pl-2 min-[981px]:grid-cols-[80px_1fr_1.05fr_24px] min-[981px]:gap-8"
+      >
+        <div class="pt-[6px] font-body text-sm text-ink-3">{s.num}</div>
+        <div class="font-sans text-2xl font-medium leading-[1.1] tracking-[-0.02em] text-ink min-[981px]:text-[28px]">{s.name}</div>
+        <div class="col-span-2 max-w-[420px] pl-16 font-body text-[15px] leading-[1.55] text-ink-2 min-[981px]:col-span-1 min-[981px]:pl-0">{s.desc}</div>
+        <div class="hidden justify-self-end pt-[6px] text-[22px] leading-none text-ink opacity-50 transition-[opacity,transform] min-[981px]:block">+</div>
+      </a>
+    ))}
+  </div>
+</section>

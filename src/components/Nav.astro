@@ -1,0 +1,90 @@
+---
+interface Props {
+  active?: 'start' | 'misja' | 'uslugi' | 'projekty' | 'opinie';
+}
+const { active } = Astro.props;
+
+const links: { id: 'start' | 'misja' | 'uslugi' | 'projekty' | 'opinie'; label: string }[] = [
+  { id: 'start', label: 'start' },
+  { id: 'misja', label: 'misja' },
+  { id: 'uslugi', label: 'usługi' },
+  { id: 'projekty', label: 'projekty' },
+  { id: 'opinie', label: 'opinie' },
+];
+
+const linkClass = (id: string) =>
+  `relative font-sans text-sm py-2 transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-px after:bg-ink after:origin-left after:transition-transform after:duration-300 ${
+    active === id
+      ? 'text-ink after:scale-x-100'
+      : 'text-ink-2 hover:text-ink after:scale-x-0 hover:after:scale-x-100'
+  }`;
+---
+
+<header class="sticky top-0 z-50 bg-white/[0.86] [backdrop-filter:saturate(140%)_blur(10px)]">
+  <div class="wrap flex h-[72px] items-center justify-between">
+    <a class="inline-flex items-baseline gap-0.5 font-sans text-xl font-semibold tracking-[-0.01em] text-ink" href="/">
+      <span>auraflux</span><sup class="ml-px -translate-y-1 text-[9px] font-medium text-ink">TM</sup>
+    </a>
+    <nav class="hidden gap-8 min-[981px]:flex">
+      {links.map((l) => (
+        <a href={l.id === 'start' ? '/' : `/#${l.id}`} class={linkClass(l.id)}>{l.label}</a>
+      ))}
+      <a href="/#kontakt" class={linkClass('kontakt')}>kontakt</a>
+    </nav>
+    <a href="/#kontakt" class="hidden items-center gap-2.5 rounded-full bg-dark px-[18px] font-sans text-sm font-medium text-white transition hover:-translate-y-px hover:bg-black min-[981px]:inline-flex h-[42px]">
+      umów konsultację <span class="inline-block transition-transform">↗</span>
+    </a>
+    <button id="hamburger" aria-label="Otwórz menu" aria-expanded="false" class="flex h-10 w-10 flex-col justify-center gap-[5.5px] rounded p-2 min-[981px]:hidden">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div id="mobile-nav" aria-hidden="true" class="fixed inset-0 top-[72px] z-49 flex translate-y-[-100%] flex-col gap-0 overflow-y-auto bg-white px-[28px] py-12 opacity-0 transition-[transform,opacity] duration-300 [pointer-events:none]">
+  {links.map((l) => (
+    <a class="mobile-nav-link border-b border-line py-[18px] font-sans text-3xl font-medium tracking-[-0.03em] text-ink transition-colors hover:text-ink-3" href={l.id === 'start' ? '/' : `/#${l.id}`}>{l.label}</a>
+  ))}
+  <a class="mobile-nav-link border-b border-line py-[18px] font-sans text-3xl font-medium tracking-[-0.03em] text-ink transition-colors hover:text-ink-3" href="/#kontakt">kontakt</a>
+  <a href="/#kontakt" class="mobile-nav-link mt-10 inline-flex h-[42px] w-fit items-center gap-2.5 self-start rounded-full bg-dark px-[18px] font-sans text-sm font-medium text-white">
+    umów konsultację <span>↗</span>
+  </a>
+</div>
+
+<style>
+  #hamburger span {
+    display: block;
+    height: 1.5px;
+    background: #111;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  #mobile-nav.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+<script>
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobile-nav');
+  if (ham && mob) {
+    ham.addEventListener('click', () => {
+      const open = mob.classList.toggle('open');
+      ham.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mob.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        mob.classList.remove('open');
+        ham.classList.remove('open');
+        ham.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+</script>

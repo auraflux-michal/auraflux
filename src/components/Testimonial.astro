@@ -1,0 +1,27 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  quote: string;
+  name: string;
+  handle: string;
+}
+const { quote, name, handle } = Astro.props;
+---
+
+<section id="opinie" class="wrap py-20">
+  <SectionHeading eyebrow="Opinie">Inspirujące<br />współprace i efekty</SectionHeading>
+  <div class="mt-9 grid items-start gap-[30px] min-[981px]:grid-cols-[1.35fr_0.9fr] min-[981px]:gap-20">
+    <div></div>
+    <div class="pt-2">
+      <div class="mb-6 flex items-center gap-[14px]">
+        <div class="h-12 w-12 rounded-full bg-[linear-gradient(135deg,#8e7a65,#3b2e23)]"></div>
+        <div>
+          <b class="block font-sans text-[15px] font-semibold text-ink">{name}</b>
+          <span class="font-body text-[13px] text-ink-3">{handle}</span>
+        </div>
+      </div>
+      <blockquote class="max-w-[520px] font-body text-base leading-[1.6] text-ink-2">{quote}</blockquote>
+    </div>
+  </div>
+</section>

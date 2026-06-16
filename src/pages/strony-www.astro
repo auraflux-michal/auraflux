@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Shero from '../components/Shero.astro';
+import LinkUl from '../components/LinkUl.astro';
+import ImageBand from '../components/ImageBand.astro';
+import StatsRow from '../components/StatsRow.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import FeatSection from '../components/FeatSection.astro';
+import SplitSection from '../components/SplitSection.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PriceGrid from '../components/PriceGrid.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { safeFetch } from '../lib/sanity';
+
+const query = `*[_type == "servicePage" && slug.current == "strony-www"][0]{
+  stats[]{n, l},
+  process{eyebrow, lead, steps[]{num, t, d}},
+  feats[]{ico, h3, p},
+  pricing[]{pk, amt, unit, pd, items, buyText, featured}
+}`;
+
+const fallback = {
+  stats: [
+    { n: '90+', l: 'wdrożonych stron i platform' },
+    { n: '1,8 s', l: 'średni czas ładowania (LCP)' },
+    { n: '6–10 tyg', l: 'od briefu do startu' },
+    { n: '+38%', l: 'średni wzrost konwersji po redesignie' },
+  ],
+  process: {
+    eyebrow: 'jak pracujemy',
+    lead: 'Projektujemy w przeglądarce, nie w próżni. Każdy ekran testujemy pod kątem celu biznesowego i wygody użytkownika.',
+    steps: [
+      { num: '01', t: 'Research i architektura', d: 'Cele, persony i mapa strony. Ustalamy strukturę treści i ścieżki konwersji.' },
+      { num: '02', t: 'UX i wireframes', d: 'Makiety o niskiej wierności, przepływy i prototyp klikalny do testów.' },
+      { num: '03', t: 'UI design', d: 'Warstwa wizualna spójna z marką: typografia, kolor, komponenty, animacje.' },
+      { num: '04', t: 'Wdrożenie i launch', d: 'Kodowanie, CMS, optymalizacja wydajności i SEO, testy i publikacja.' },
+    ],
+  },
+  feats: [
+    { ico: '◳', h3: 'Projekt UX/UI', p: 'Pełen projekt w Figmie z systemem komponentów i stanami.' },
+    { ico: '▭', h3: 'Responsywność', p: 'Dopracowane widoki mobile, tablet i desktop bez kompromisów.' },
+    { ico: '⌘', h3: 'CMS', p: 'Samodzielna edycja treści — bez programisty przy każdej zmianie.' },
+    { ico: '✶', h3: 'Mikrointerakcje', p: 'Subtelne animacje, które prowadzą wzrok i budują premium feel.' },
+    { ico: '↗', h3: 'SEO techniczne', p: 'Struktura, metadane, szybkość i Core Web Vitals na zielono.' },
+    { ico: '▦', h3: 'Analytics', p: 'Wdrożenie pomiaru i zdarzeń, byś wiedział co naprawdę działa.' },
+  ],
+  pricing: [
+    { pk: 'Landing', amt: '6 000', unit: 'zł', pd: 'Jedna, dopracowana strona pod konkretną kampanię lub produkt.', items: ['Projekt UX/UI jednej strony', 'Responsywność', 'Formularz i analytics', 'Optymalizacja szybkości'], buyText: 'Wybieram landing' },
+    { pk: 'Strona firmowa', amt: 'od 14 000', unit: 'zł', pd: 'Kompletna witryna prezentująca ofertę, zespół i realizacje.', items: ['Do 8 podstron + CMS', 'Design system', 'SEO techniczne', 'Szkolenie z edycji'], buyText: 'Wybieram stronę', featured: true },
+    { pk: 'Platforma', amt: 'indywidualnie', pd: 'Rozbudowane serwisy, sklepy i aplikacje webowe.', items: ['Architektura na miarę', 'Integracje i automatyzacje', 'Panel i role użytkowników', 'Opieka po wdrożeniu'], buyText: 'Porozmawiajmy' },
+  ],
+};
+
+const data = await safeFetch(query, fallback);
+---
+
+<Layout title="Strony internetowe i UX/UI — auraflux" description="Strony internetowe i UX/UI — auraflux. Projektujemy i wdrażamy strony z myślą o ludziach i wynikach." active="uslugi">
+  <Breadcrumb parentLabel="usługi" parentHref="/#uslugi" current="strony internetowe i UX/UI" />
+
+  <Shero tag="usługa 02 — strony www & UX/UI" lead="Projektujemy i wdrażamy strony z myślą o ludziach i wynikach. Minimalistyczny design, intuicyjna funkcjonalność i pełna zgodność z Twoją marką.">
+    Strony, które<br /><span class="it">oddychają</span> i sprzedają
+    <Fragment slot="actions">
+      <LinkUl href="#pakiety" arrow="↓">zobacz pakiety</LinkUl>
+      <LinkUl href="#kontakt">porozmawiajmy</LinkUl>
+    </Fragment>
+  </Shero>
+
+  <ImageBand label="Główny mockup strony / UI" />
+
+  <section class="wrap pt-16">
+    <StatsRow stats={data.stats} />
+  </section>
+
+  <ProcessSection eyebrow={data.process.eyebrow} lead={data.process.lead} steps={data.process.steps}>
+    Od architektury<br />do <span class="it">launchu</span>
+  </ProcessSection>
+
+  <FeatSection eyebrow="co otrzymujesz" feats={data.feats}>
+    Strona gotowa<br />na wzrost
+  </FeatSection>
+
+  <section class="wrap pb-2">
+    <SplitSection
+      imageLabel="Design system / komponenty"
+      heading="Design system, nie pojedyncze ekrany"
+      paragraph="Budujemy spójny system komponentów, dzięki któremu strona rośnie razem z Tobą — nowe podstrony powstają szybciej i wyglądają tak samo dobrze."
+      items={['Biblioteka komponentów i tokeny', 'Spójna typografia i siatka', 'Gotowe wzorce do rozbudowy']}
+    />
+    <SplitSection
+      reverse
+      imageLabel="Wydajność / wykres Core Web Vitals"
+      heading="Szybkość, którą czuć i którą widzi Google"
+      paragraph="Optymalizujemy obrazy, czcionki i kod, by strona ładowała się błyskawicznie. Szybkość to dziś realny czynnik konwersji i pozycji w wyszukiwarce."
+      items={['Core Web Vitals na zielono', 'Lazy-loading i nowoczesne formaty', 'Lekki, semantyczny kod']}
+    />
+  </section>
+
+  <section id="pakiety" class="wrap pb-20">
+    <SectionHeading eyebrow="pakiety">Dobierz zakres<br />do etapu firmy</SectionHeading>
+    <PriceGrid tiers={data.pricing} />
+  </section>
+
+  <LeadMagnet
+    heading="Zanim zlecisz stronę —"
+    headingItalic="12 rzeczy"
+    headingRest="które musisz wiedzieć"
+    paragraph="Praktyczny PDF, który przeprowadzi Cię przez briefing, budżet i pułapki współpracy z agencją. Oszczędź tygodnie i tysiące złotych jeszcze przed startem projektu."
+    bullets={['Checklista briefu na 1 stronę A4', 'Realne widełki budżetów 2026', '7 pytań, które rozbroją każdą agencję']}
+  />
+
+  <ContactSection linkText="Napisz do nas" rest=", a zaprojektujemy stronę, która pracuje na Twój wynik." />
+</Layout>

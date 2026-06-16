@@ -1,0 +1,99 @@
+---
+---
+<footer class="wrap border-t border-line py-[90px] pb-[30px]">
+  <div class="grid grid-cols-1 items-start gap-10 min-[981px]:grid-cols-[1.1fr_0.9fr_0.9fr_1.3fr] min-[981px]:gap-12">
+    <div>
+      <h4 class="mb-[22px] font-sans text-[13px] font-medium text-ink-3">Porozmawiajmy.</h4>
+      <address class="font-sans text-[15px] leading-[1.6] text-ink not-italic [&_a]:border-b [&_a]:border-line-2 [&_a]:text-ink">
+        ul. Zabłocie 23<br />30-701 Kraków, Polska<br /><br />
+        <a href="mailto:czesc@auraflux.pl">czesc@auraflux.pl</a><br />
+        +48 530 532 466<br /><br />10 – 17:00
+      </address>
+    </div>
+    <div>
+      <h4 class="mb-[22px] font-sans text-[13px] font-medium text-ink-3">Jesteśmy tutaj.</h4>
+      <nav class="flex flex-col gap-3" aria-label="Media społecznościowe">
+        <a class="font-sans text-[15px] text-ink hover:text-accent" href="#">facebook</a>
+        <a class="font-sans text-[15px] text-ink hover:text-accent" href="#">twitter</a>
+        <a class="font-sans text-[15px] text-ink hover:text-accent" href="#">linkedin</a>
+        <a class="font-sans text-[15px] text-ink hover:text-accent" href="#">dribbble</a>
+      </nav>
+    </div>
+    <div>
+      <h4 class="mb-[22px] font-sans text-[13px] font-medium text-ink-3">Szybkie linki.</h4>
+      <nav class="flex flex-col gap-3" aria-label="Szybkie linki">
+        <a class="font-sans text-[15px] text-ink hover:text-accent" href="/branding">branding</a>
+        <a class="font-sans text-[15px] text-ink hover:text-accent" href="/strony-www">strony &amp; UX/UI</a>
+        <a class="font-sans text-[15px] text-ink hover:text-accent" href="/opieka-technologiczna">opieka technologiczna</a>
+        <a class="font-sans text-[15px] text-ink hover:text-accent" href="/partnerstwo-strategiczne">partnerstwo</a>
+      </nav>
+    </div>
+    <div>
+      <h4 class="mb-[22px] font-sans text-[13px] font-medium text-ink-3">&nbsp;</h4>
+      <p class="mb-[18px] max-w-[340px] font-body text-sm leading-[1.5] text-ink-2">
+        Zapisz się na newsletter i otrzymuj najświeższe informacje technologiczne.
+      </p>
+      <form id="newsletter-form" class="flex max-w-[420px] border border-line-2 bg-white" aria-label="Zapisz się na newsletter">
+        <label for="newsletter-email" class="sr-only">Adres e-mail</label>
+        <input
+          id="newsletter-email"
+          type="email"
+          name="email"
+          placeholder="Wpisz adres e-mail"
+          required
+          class="flex-1 border-0 bg-transparent px-4 py-[14px] font-body text-sm text-ink-2 outline-none"
+        />
+        <button type="submit" class="bg-ink px-[22px] font-sans text-sm font-medium text-white transition-colors hover:bg-accent">
+          Zapisz się
+        </button>
+      </form>
+      <p id="newsletter-status" class="mt-2 font-body text-xs text-ink-3" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+  <div class="mt-[90px] flex items-center justify-between font-body text-[13px] text-ink-3">
+    <div>© 2026 All Rights Reserved.</div>
+    <div></div>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
+  const status = document.getElementById('newsletter-status');
+  if (form && status) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (form.elements.namedItem('email') as HTMLInputElement)?.value.trim();
+      const button = form.querySelector('button') as HTMLButtonElement;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = 'Podaj poprawny adres e-mail.';
+        return;
+      }
+      button.disabled = true;
+      const originalText = button.textContent;
+      try {
+        const res = await fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+        if (res.ok && data.ok) {
+          button.textContent = 'Zapisano ✓';
+          status.textContent = '';
+          form.reset();
+        } else {
+          button.disabled = false;
+          status.textContent = data.message || 'Coś poszło nie tak. Spróbuj ponownie.';
+        }
+      } catch {
+        button.disabled = false;
+        status.textContent = 'Coś poszło nie tak. Spróbuj ponownie.';
+      } finally {
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+        }, 4000);
+      }
+    });
+  }
+</script>

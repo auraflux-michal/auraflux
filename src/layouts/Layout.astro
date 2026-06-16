@@ -1,0 +1,54 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import GiantWordmark from '../components/GiantWordmark.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  active?: 'start' | 'misja' | 'uslugi' | 'projekty' | 'opinie';
+}
+
+const { title, description, active } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Nav active={active} />
+    <slot />
+    <Footer />
+    <GiantWordmark />
+    <script>
+      document.querySelectorAll('a[href*="#"]').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          const href = a.getAttribute('href') || '';
+          const hashIndex = href.indexOf('#');
+          if (hashIndex === -1) return;
+          const path = href.slice(0, hashIndex);
+          const id = href.slice(hashIndex);
+          const samePage = path === '' || path === window.location.pathname;
+          if (!samePage || id.length <= 1) return;
+          const el = document.querySelector(id);
+          if (el) {
+            e.preventDefault();
+            window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

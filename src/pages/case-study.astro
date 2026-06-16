@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import LinkUl from '../components/LinkUl.astro';
+import PlaceholderImage from '../components/PlaceholderImage.astro';
+import StatsRow from '../components/StatsRow.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { safeFetch } from '../lib/sanity';
+
+const query = `*[_type == "caseStudy" && slug.current == $slug][0]{
+  client, year, scope, industry, tag,
+  summary, challenge, solution,
+  quote, quoteSrc,
+  results[]{n, l},
+  nextProjectName
+}`;
+
+const fallback = {
+  client: 'Nazwa klienta',
+  year: '2026',
+  scope: 'Branding · UX/UI · WWW',
+  industry: 'Lifestyle',
+  tag: '2026 — strategia · strona internetowa',
+  summary: 'Jednozdaniowe podsumowanie: dla kogo, jaki był cel i co osiągnęliśmy. To miejsce na hook, który zatrzyma czytelnika.',
+  challenge: [
+    'Opisz punkt wyjścia: z czym zgłosił się klient, jakie miał problemy i ograniczenia. Jedno–dwa akapity konkretu, bez lania wody.',
+    'Dodaj kontekst rynkowy lub biznesowy, który pomaga zrozumieć, dlaczego projekt był ważny i ambitny.',
+  ],
+  solution: [
+    'Opisz podejście i kluczowe decyzje projektowe. Co zaproponowaliśmy, dlaczego tak i jak to wpłynęło na efekt końcowy.',
+    'Wymień najważniejsze elementy realizacji: kierunek wizualny, architekturę, technologię, szczególne rozwiązania.',
+  ],
+  quote: '„Miejsce na opinię klienta — jedno mocne zdanie, które podsumowuje współpracę i jej efekt."',
+  quoteSrc: '— Imię Nazwisko, stanowisko, Nazwa klienta',
+  results: [
+    { n: '+120%', l: 'wzrost ruchu organicznego' },
+    { n: '+38%', l: 'wyższa konwersja' },
+    { n: '1,6 s', l: 'czas ładowania strony' },
+    { n: '4 tyg', l: 'od startu do publikacji' },
+  ],
+  nextProjectName: 'Pozytywna Inteligencja',
+};
+
+const data = await safeFetch(query, fallback, { slug: 'nazwa-projektu' });
+---
+
+<Layout title="Case study — auraflux" description="Case study — auraflux. Podróż od wizji do ożywienia marki." active="projekty">
+  <Breadcrumb parentLabel="projekty" parentHref="/#projekty" current="Nazwa projektu" />
+
+  <section class="wrap pb-14 pt-[30px]">
+    <span class="mb-[30px] inline-block font-body text-[13px] text-ink-3">{data.tag}</span>
+    <div class="grid items-end gap-[34px] min-[981px]:grid-cols-[1.3fr_0.9fr] min-[981px]:gap-20">
+      <h1 class="m-0 font-sans text-[clamp(52px,8vw,108px)] font-medium leading-[0.96] tracking-[-0.04em] text-ink">
+        Nazwa<br /><span class="font-serif font-normal italic tracking-[-0.02em]">projektu</span>
+      </h1>
+      <div class="flex max-w-none flex-col gap-[30px] pb-[10px] min-[981px]:ml-auto min-[981px]:max-w-[380px]">
+        <p class="font-body text-lg leading-[1.55] text-ink-2">{data.summary}</p>
+        <div class="flex items-center gap-[22px]">
+          <LinkUl href="#">zobacz live</LinkUl>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 grid grid-cols-1 gap-7 border-y border-line py-[30px] min-[561px]:grid-cols-2 min-[981px]:grid-cols-4 min-[981px]:gap-14">
+      <div>
+        <div class="mb-2 font-body text-xs uppercase tracking-[0.05em] text-ink-3">Klient</div>
+        <div class="font-sans text-base font-medium text-ink">{data.client}</div>
+      </div>
+      <div>
+        <div class="mb-2 font-body text-xs uppercase tracking-[0.05em] text-ink-3">Rok</div>
+        <div class="font-sans text-base font-medium text-ink">{data.year}</div>
+      </div>
+      <div>
+        <div class="mb-2 font-body text-xs uppercase tracking-[0.05em] text-ink-3">Zakres</div>
+        <div class="font-sans text-base font-medium text-ink">{data.scope}</div>
+      </div>
+      <div>
+        <div class="mb-2 font-body text-xs uppercase tracking-[0.05em] text-ink-3">Branża</div>
+        <div class="font-sans text-base font-medium text-ink">{data.industry}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <PlaceholderImage label="Główna grafika projektu (full-bleed)" class="h-[clamp(320px,46vw,620px)] w-full" bg="#eeeae3" />
+  </section>
+
+  <section class="wrap grid grid-cols-1 items-start gap-7 py-20 min-[981px]:grid-cols-[1.3fr_0.9fr] min-[981px]:gap-20">
+    <h2 class="m-0 font-sans text-[clamp(30px,3.6vw,44px)] font-medium leading-[1.05] tracking-[-0.03em] text-ink">Wyzwanie</h2>
+    <div class="max-w-none font-body text-base leading-[1.65] text-ink-2 min-[981px]:ml-auto min-[981px]:max-w-[380px]">
+      {data.challenge.map((p) => <p class="mb-4">{p}</p>)}
+    </div>
+  </section>
+
+  <section class="wrap grid grid-cols-1 gap-6 pb-8 pt-5 min-[981px]:grid-cols-2">
+    <PlaceholderImage label="Grafika 1" class="h-[clamp(260px,30vw,420px)] w-full" bg="#eeeae3" />
+    <PlaceholderImage label="Grafika 2" class="h-[clamp(260px,30vw,420px)] w-full" bg="#eeeae3" />
+  </section>
+
+  <section class="wrap grid grid-cols-1 items-start gap-7 py-20 min-[981px]:grid-cols-[1.3fr_0.9fr] min-[981px]:gap-20">
+    <h2 class="m-0 font-sans text-[clamp(30px,3.6vw,44px)] font-medium leading-[1.05] tracking-[-0.03em] text-ink">Rozwiązanie</h2>
+    <div class="max-w-none font-body text-base leading-[1.65] text-ink-2 min-[981px]:ml-auto min-[981px]:max-w-[380px]">
+      {data.solution.map((p) => <p class="mb-4">{p}</p>)}
+    </div>
+  </section>
+
+  <section class="wrap grid grid-cols-1 gap-6 pb-8 pt-5 min-[981px]:grid-cols-2">
+    <div class="min-[981px]:col-span-2">
+      <PlaceholderImage label="Szeroka grafika (np. mockup desktop)" class="h-[clamp(320px,40vw,600px)] w-full" bg="#eeeae3" />
+    </div>
+    <PlaceholderImage label="Grafika 4 (np. mobile)" class="h-[clamp(260px,30vw,420px)] w-full" bg="#eeeae3" />
+    <PlaceholderImage label="Grafika 5 (np. detal)" class="h-[clamp(260px,30vw,420px)] w-full" bg="#eeeae3" />
+  </section>
+
+  <section class="wrap py-[70px]">
+    <blockquote class="max-w-[980px] font-sans text-[clamp(26px,3.4vw,42px)] font-medium leading-[1.18] tracking-[-0.02em] text-ink">{data.quote}</blockquote>
+    <div class="mt-[26px] font-body text-sm text-ink-3">{data.quoteSrc}</div>
+  </section>
+
+  <section class="wrap">
+    <p class="mb-6 font-body text-[13px] text-ink-3">efekty</p>
+    <StatsRow stats={data.results} />
+  </section>
+
+  <section class="wrap" style="margin-top:70px">
+    <a class="flex items-center justify-between gap-6 border-t border-line py-[46px]" href="/case-study">
+      <div>
+        <div class="font-body text-[13px] text-ink-3">następny projekt</div>
+        <div class="font-sans text-[clamp(28px,3.6vw,48px)] font-medium tracking-[-0.03em] text-ink">{data.nextProjectName}</div>
+      </div>
+      <div class="inline-flex items-center gap-2 font-sans text-sm font-medium text-ink">zobacz <span>↗</span></div>
+    </a>
+  </section>
+
+  <LeadMagnet
+    topPadding
+    heading="Zanim zlecisz projekt —"
+    headingItalic="12 rzeczy"
+    headingRest="które musisz wiedzieć"
+    paragraph="Praktyczny PDF, który przeprowadzi Cię przez briefing, budżet i pułapki współpracy z agencją. Oszczędź tygodnie i tysiące złotych jeszcze przed startem projektu."
+    bullets={['Checklista briefu na 1 stronę A4', 'Realne widełki budżetów 2026', '7 pytań, które rozbroją każdą agencję']}
+  />
+
+  <ContactSection linkText="Masz podobny projekt?" rest="Napisz do nas — pokażemy, jak możemy pomóc." />
+</Layout>
