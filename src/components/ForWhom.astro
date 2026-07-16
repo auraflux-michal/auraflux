@@ -1,0 +1,63 @@
+---
+import SectionHeading from './SectionHeading.astro';
+---
+
+<section id="dla-kogo" class="wrap py-20">
+  <SectionHeading eyebrow="dla kogo">
+    Rozpoznajesz<br />siebie tutaj?
+  </SectionHeading>
+
+  <div class="mt-14 grid gap-6 min-[761px]:grid-cols-2">
+    <!-- Segment 1 -->
+    <div class="flex flex-col justify-between rounded-[6px] border border-line bg-canvas-2 p-8 min-[981px]:p-10">
+      <div>
+        <div class="mb-5 inline-block rounded-full bg-dark px-4 py-1.5 font-sans text-xs font-medium text-white">Korpo-uchodźca</div>
+        <h3 class="mb-4 font-sans text-2xl font-medium leading-[1.1] tracking-[-0.02em] text-ink">
+          Odchodzisz z etatu.<br />Budujesz coś swojego.
+        </h3>
+        <p class="mb-6 font-body text-[15px] leading-[1.6] text-ink-2">
+          Masz umiejętności i pomysł, ale brakuje Ci mapy — jak postawić stronę, zbudować markę, ruszyć ze sprzedażą, nie tracąc głowy. Czujesz syndrom oszusta i lęk przed tym, co powiedzą inni.
+        </p>
+        <ul class="flex flex-col gap-2">
+          {[
+            'Strategia i mapa działania od zera',
+            'Wsparcie mentalne 1:1 lub mastermind',
+            'Paczka "Start Biznesu" (AI + Notion)',
+            'Walidacja pomysłu zanim wydasz złotówkę',
+          ].map((item) => (
+            <li class="flex items-baseline gap-3 font-sans text-sm text-ink before:font-bold before:text-ink before:content-['→']">{item}</li>
+          ))}
+        </ul>
+      </div>
+      <a href="/#kontakt" class="mt-8 inline-flex h-[42px] w-fit items-center gap-2 self-start rounded-full border border-ink px-[18px] font-sans text-sm font-medium text-ink transition hover:-translate-y-px hover:bg-dark hover:text-white">
+        umów Discovery Call <span>↗</span>
+      </a>
+    </div>
+
+    <!-- Segment 2 -->
+    <div class="flex flex-col justify-between rounded-[6px] bg-dark p-8 min-[981px]:p-10">
+      <div>
+        <div class="mb-5 inline-block rounded-full bg-white/10 px-4 py-1.5 font-sans text-xs font-medium text-white">Przedsiębiorca / Twórca</div>
+        <h3 class="mb-4 font-sans text-2xl font-medium leading-[1.1] tracking-[-0.02em] text-white">
+          Masz firmę.<br />Chaos ją blokuje.
+        </h3>
+        <p class="mb-6 font-body text-[15px] leading-[1.6] text-white/70">
+          Budujesz od lat, ale technologia, marketing i wizerunek ciągną w dół. Przepalasz budżety na reklamy, które nie konwertują. Jesteś sam ze swoimi problemami i tracisz lekkość, dla której to zaczynałeś.
+        </p>
+        <ul class="flex flex-col gap-2">
+          {[
+            'Audyt marketingu, UX, sprzedaży, procesów',
+            'Wdrożenia WWW, Meta Ads, SEO, branding',
+            'Retainer — stała opieka i outsourcing',
+            'Automatyzacje AI i warsztaty Reset',
+          ].map((item) => (
+            <li class="flex items-baseline gap-3 font-sans text-sm text-white before:font-bold before:text-white/60 before:content-['→']">{item}</li>
+          ))}
+        </ul>
+      </div>
+      <a href="/#kontakt" class="mt-8 inline-flex h-[42px] w-fit items-center gap-2 self-start rounded-full bg-white px-[18px] font-sans text-sm font-medium text-dark transition hover:-translate-y-px">
+        porozmawiajmy <span>↗</span>
+      </a>
+    </div>
+  </div>
+</section>
