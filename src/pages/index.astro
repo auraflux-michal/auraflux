@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import BrandsStrip from '../components/BrandsStrip.astro';
 import Mission from '../components/Mission.astro';
-import ForWhom from '../components/ForWhom.astro';
 import ServicesList from '../components/ServicesList.astro';
 import ProjectsGrid from '../components/ProjectsGrid.astro';
 import Testimonial from '../components/Testimonial.astro';
@@ -20,88 +19,32 @@ const query = `*[_type == "homePage"][0]{
 
 const fallback = {
   services: [
-    {
-      num: '01',
-      name: 'Strategia i Discovery Call',
-      desc: 'Zaczynamy od 15-minutowej rozmowy. Mapujemy Twój cel, walidujemy pomysł i układamy konkretny plan działania — bez lania wody, bez kosztów wstępnych.',
-      href: '/#kontakt',
-    },
-    {
-      num: '02',
-      name: 'Branding i tożsamość marki',
-      desc: 'Budujemy marki od podstaw lub odświeżamy istniejące. Strategia, identyfikacja wizualna, komunikacja — spójnie, autentycznie, premium. Marka, która mówi, kim naprawdę jesteś.',
-      href: '/branding',
-    },
-    {
-      num: '03',
-      name: 'Strony internetowe i UX/UI',
-      desc: 'Projektujemy i wdrażamy strony, które konwertują. Minimalistyczny design, intuicyjna funkcjonalność, pełna zgodność z marką — i wyniki mierzone w leadach, nie w polubieniach.',
-      href: '/strony-www',
-    },
-    {
-      num: '04',
-      name: 'Meta Ads, SEO i content marketing',
-      desc: 'Kampanie, które nie przepalają budżetu. Precyzyjny targeting, lejki sprzedażowe, optymalizacja na bieżąco — YouTube, podcast, blog, e-mail. Przyciągamy klientów, nie tylko ruch.',
-      href: '/partnerstwo-strategiczne',
-    },
-    {
-      num: '05',
-      name: 'Automatyzacje AI i opieka techniczna',
-      desc: 'Wdrażamy AI w procesach Twojej firmy, przejmujemy hosting, domeny, aktualizacje i bezpieczeństwo. Technologia przestaje być Twoim problemem — na zawsze.',
-      href: '/opieka-technologiczna',
-    },
-    {
-      num: '06',
-      name: 'Retainer i partnerstwo strategiczne',
-      desc: 'Stały abonament opieki — audyty, optymalizacja, outsourcing kompetencji. Jesteśmy Twoim zewnętrznym działem marketingu i technologii. Ty prowadzisz biznes, my resztę.',
-      href: '/partnerstwo-strategiczne',
-    },
+    { num: '01', name: 'Tworzenie brandingu', desc: 'Budujemy marki od podstaw lub odświeżamy istniejące. Strategia, identyfikacja wizualna, komunikacja — spójnie, autentycznie, premium.', href: '/branding' },
+    { num: '02', name: 'Strony internetowe i UX/UI', desc: 'Projektujemy i wdrażamy strony, które oddychają. Minimalistyczny design, intuicyjna funkcjonalność i pełna zgodność z Twoją marką.', href: '/strony-www' },
+    { num: '03', name: 'Opieka technologiczna', desc: 'Hosting, domeny, aktualizacje, bezpieczeństwo — pilnujemy wszystkiego, aby Twój projekt działał bez problemów, a Ty miał spokój i czas na własne pasje.', href: '/opieka-technologiczna' },
+    { num: '04', name: 'Partnerstwo strategiczne', desc: 'Integracja systemów, planowanie projektów i optymalizacja procesów. Twój biznes rozwija się w harmonii z wizją i technologią.', href: '/partnerstwo-strategiczne' },
   ],
   testimonial: {
-    quote: 'Z perspektywy czasu mogę dodać, że współpraca przebiegała znakomicie dzięki profesjonalizmowi, kreatywności i skupieniu na kliencie. Efekt końcowy jest odzwierciedleniem tych cech — dziękuję!',
+    quote: 'Z perspektywy czasu mogę również dodać, że współpraca przebiegała znakomicie dzięki profesjonalizmowi, kreatywności, komunikacji i skupieniu zarówno na kliencie, jak i projekcie. Efekt końcowy jest odzwierciedleniem tych cech — dziękuję!',
     name: 'Krzysztof Wnęk',
     handle: '@pozytywnainteligencja',
   },
   faq: [
-    {
-      q: 'Czym różnicie się od zwykłej agencji?',
-      a: 'Nie sprzedajemy usług — sprzedajemy transformację, zaufanie i odciążenie. Wchodzimy głęboko w Twój biznes, bierzemy odpowiedzialność za wyniki i działamy jak Wasz zewnętrzny dział strategii. Powtarzalna realizacja idzie do AI lub sprawdzonych podwykonawców, a Ty rozmawiasz zawsze z Michałem lub Krzysztofem — nie z juniorem na zmianie.',
-    },
-    {
-      q: 'Ile kosztuje współpraca?',
-      a: 'Projekty one-off (strona, branding, kampania) zaczynają się od 12 000 zł. Retainer miesięczny zależy od zakresu — rozmawiamy od kilku do kilkunastu tysięcy PLN. Zawsze zaczynamy od bezpłatnego Discovery Call i dopiero wtedy składamy konkretną ofertę.',
-    },
-    {
-      q: 'Jestem korpo-uchodźcą — dopiero zaczynam. Czy to dla mnie?',
-      a: 'Tak — to jeden z dwóch segmentów, dla których powstał auraflux. Pomagamy zamienić umiejętności i pomysł w działający biznes: strategia, walidacja, marka, strona, pierwsi klienci. Możemy zacząć od paczki "Start Biznesu" w przystępnej cenie.',
-    },
-    {
-      q: 'Jak szybko zobaczymy efekty?',
-      a: 'Discovery Call i wstępna strategia — w ciągu tygodnia. Strona lub landing page — 6–10 tygodni. Pierwsze wyniki kampanii reklamowej — zwykle 2–4 tygodnie od startu. Retainer przejmujemy w 5 dni roboczych.',
-    },
-    {
-      q: 'Czy działacie tylko w Krakowie?',
-      a: 'Pracujemy zdalnie z klientami z całej Polski i Europy. Spotkania prowadzimy online. Jeśli wolisz spotkanie osobiste — jesteśmy w Krakowie (Zabłocie 23).',
-    },
-    {
-      q: 'Co to są warsztaty Reset i retreaty?',
-      a: 'Intensywne, wyjazdowe warsztaty dla przedsiębiorców i zespołów, które chcą „zresetować" sposób pracy, wdrożyć AI i odzyskać lekkość działania. Prowadzimy je na terenie całej Polski — od kameralnych grup po większe formaty.',
-    },
+    { q: 'Ile kosztuje budowa strony internetowej lub branding?', a: 'Każdy projekt wyceniamy indywidualnie po krótkim brieffie i rozmowie. Strona internetowa zaczyna się od ok. 12 000 zł, kompleksowy branding — od 8 000 zł. Po pierwszej rozmowie wysyłamy konkretny zakres i widełki cenowe.' },
+    { q: 'Jak długo trwa wdrożenie usług, np. strony czy opieki tech?', a: 'Standardowo strona internetowa to 6–10 tygodni, branding 4–6 tygodni, a opiekę techniczną przejmujemy w 5 dni roboczych. Harmonogram zawsze ustalamy razem na start projektu.' },
+    { q: 'Czy obsługujecie tylko duże projekty, czy też małych twórców?', a: 'Pracujemy zarówno ze scale-upami, jak i z jednoosobowymi działalnościami i twórcami. Najważniejsza dla nas jest spójność wizji — wielkość firmy ma znaczenie drugorzędne.' },
+    { q: 'Co z bezpieczeństwem danych i aktualizacjami?', a: 'W ramach opieki technologicznej dbamy o backupy, certyfikaty SSL, aktualizacje CMS-a, monitoring uptime i regularne audyty bezpieczeństwa. Wszystko raportujemy w comiesięcznym podsumowaniu.' },
+    { q: 'Jak mierzycie sukces i generujecie referencje?', a: 'Sukces mierzymy realnymi wskaźnikami — konwersją, ruchem organicznym, czasem na stronie i opinią klientów. Po wdrożeniu prosimy o krótką ankietę NPS i, jeśli zechcesz, referencję wideo.' },
   ],
 };
 
 const data = await safeFetch(query, fallback);
 ---
 
-<Layout
-  title="auraflux — transformacja. zaufanie. odciążenie."
-  description="Strategiczny partner dla przedsiębiorców i korpo-uchodźców. Branding, strony, AI, Meta Ads — wszystko w jednym miejscu, bez corpo-dystansu."
-  active="start"
->
+<Layout title="auraflux — design. wdrożenie. opieka." description="auraflux — projektujemy, wdrażamy i opiekujemy się markami, które oddychają i przyciągają klientów." active="start">
   <Hero />
   <BrandsStrip />
   <Mission />
-  <ForWhom />
   <ServicesList services={data.services} />
   <ProjectsGrid
     tall={[
@@ -110,21 +53,14 @@ const data = await safeFetch(query, fallback);
     ]}
     row={{ title: 'Ask Spot', sub: '2024 · Chatbot · Landing page', href: '/case-study', bg: '#dad6cd' }}
   />
-  <Testimonial
-    quote={data.testimonial.quote}
-    name={data.testimonial.name}
-    handle={data.testimonial.handle}
-  />
+  <Testimonial quote={data.testimonial.quote} name={data.testimonial.name} handle={data.testimonial.handle} />
   <LeadMagnet
-    heading="Zanim zlecisz cokolwiek —"
+    heading="Zanim zlecisz stronę —"
     headingItalic="12 rzeczy"
     headingRest="które musisz wiedzieć"
-    paragraph="Praktyczny PDF dla korpo-uchodźców i przedsiębiorców: jak dobrać partnera strategicznego, uniknąć przepalania budżetu i ruszyć z projektem bez chaosu. Oszczędź tygodnie i tysiące złotych jeszcze przed startem."
-    bullets={['Checklista briefu na 1 stronę A4', 'Realne widełki budżetów 2026', '7 pytań, które sprawdzą każdego partnera']}
+    paragraph="Praktyczny PDF, który przeprowadzi Cię przez briefing, budżet i pułapki współpracy z agencją. Oszczędź tygodnie i tysiące złotych jeszcze przed startem projektu."
+    bullets={['Checklista briefu na 1 stronę A4', 'Realne widełki budżetów 2026', '7 pytań, które rozbroją każdą agencję']}
   />
-  <ContactSection
-    linkText="Napisz do nas"
-    rest=", a w 15 minut ustalimy, jak przejąć Twoją technologię, marketing i strategię — żebyś Ty mógł znowu skupić się na tym, po co to wszystko zacząłeś."
-  />
+  <ContactSection linkText="Napisz do nas" rest=", a pokażemy, jak odciążyć Cię w technologii i strategii, aby Twój biznes działał bez zakłóceń." />
   <FAQ items={data.faq} />
 </Layout>
