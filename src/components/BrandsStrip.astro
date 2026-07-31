@@ -1,14 +1,17 @@
 ---
-import PlaceholderImage from './PlaceholderImage.astro';
-
-const logos = [1, 2, 3, 4, 5, 6];
+const brands = ['Abelard Olza', 'Pozytywna Inteligencja', 'Ask Spot', 'Studio Forma', 'Nord Digital', 'Lauro Home'];
 ---
 
-<section class="wrap pb-[90px] pt-[30px]">
-  <div class="mb-7 font-body text-[13px] text-ink-3">zaufały nam takie marki jak</div>
-  <div class="grid grid-cols-3 items-center gap-x-6 gap-y-8 min-[981px]:grid-cols-6 min-[981px]:gap-y-6">
-    {logos.map((n) => (
-      <PlaceholderImage label={`Logo ${n}`} class="h-[56px] w-full" bg="#f6f6f4" />
-    ))}
+<section class="py-16 overflow-hidden border-b border-line">
+  <p class="wrap mb-8 font-body text-[12px] uppercase tracking-[0.12em] text-ink-3">zaufały nam</p>
+  <div class="relative">
+    <div class="marquee-track marquee-slow select-none">
+      {[...brands, ...brands].map((name) => (
+        <span class="inline-flex items-center gap-10 px-10">
+          <span class="font-sans text-[15px] font-medium tracking-[-0.01em] text-ink-2 opacity-40 transition-opacity hover:opacity-100">{name}</span>
+          <span class="h-[1px] w-[40px] bg-line"></span>
+        </span>
+      ))}
+    </div>
   </div>
 </section>

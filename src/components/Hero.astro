@@ -2,68 +2,73 @@
 import LinkUl from './LinkUl.astro';
 ---
 
-<section id="start" class="relative overflow-hidden pb-[100px] pt-[84px]">
+<section id="start" class="relative flex min-h-[100svh] flex-col overflow-hidden">
   <!-- animated gradient orbs -->
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
-    <div class="orb-1 absolute -left-[20%] top-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(180,138,120,0.18)_0%,transparent_70%)]"></div>
-    <div class="orb-2 absolute -right-[10%] bottom-[-20%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(107,91,78,0.14)_0%,transparent_70%)]"></div>
+    <div class="orb-1 absolute -left-[30%] top-[-15%] h-[800px] w-[800px] rounded-full bg-[radial-gradient(circle,rgba(180,138,120,0.16)_0%,transparent_65%)]"></div>
+    <div class="orb-2 absolute -right-[20%] top-[20%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(107,91,78,0.12)_0%,transparent_65%)]"></div>
+    <div class="orb-3 absolute bottom-[-10%] left-[30%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(160,120,90,0.08)_0%,transparent_65%)]"></div>
   </div>
 
-  <div class="wrap relative">
-    <!-- headline -->
-    <div class="grid items-start gap-10 min-[981px]:grid-cols-[1.35fr_0.9fr] min-[981px]:gap-20">
-      <div>
-        <h1 class="m-0 font-sans text-[clamp(72px,11vw,168px)] font-medium leading-[0.95] tracking-[-0.045em] text-ink">
-          <span class="reveal block">design<span class="text-ink">.</span></span>
-          <span class="reveal delay-1 block">wdrożenie<span class="text-ink">.</span></span>
-          <span class="reveal delay-2 block font-serif font-normal italic tracking-[-0.02em]">opieka</span>
-        </h1>
-      </div>
+  <!-- main content -->
+  <div class="wrap relative flex flex-1 flex-col justify-center pt-[100px] pb-16">
+    <!-- eyebrow badge -->
+    <div class="reveal mb-10 inline-flex items-center gap-2 self-start">
+      <span class="h-[6px] w-[6px] rounded-full bg-[#b48a78] shadow-[0_0_8px_rgba(180,138,120,0.6)]"></span>
+      <span class="font-body text-[12px] uppercase tracking-[0.15em] text-ink-3">Studio kreatywne · Warszawa</span>
+    </div>
 
-      <div class="reveal delay-3 flex max-w-none flex-col gap-9 pt-[14px] min-[981px]:ml-auto min-[981px]:max-w-[360px]">
-        <p class="max-w-[340px] font-body text-[17px] leading-[1.55] text-ink-2">
-          Budujemy projekty, które oddychają i nie proszą o uwagę — one ją przyciągają. Ty skupiasz się na swojej pasji, my pilnujemy reszty.
-        </p>
+    <!-- headline -->
+    <h1 class="m-0 font-sans font-medium leading-[0.92] tracking-[-0.045em] text-ink">
+      <span class="reveal hero-word block overflow-hidden">
+        <span class="block text-[clamp(68px,10.5vw,158px)]">design<span class="text-ink-3">.</span></span>
+      </span>
+      <span class="reveal delay-1 hero-word block overflow-hidden">
+        <span class="block text-[clamp(68px,10.5vw,158px)]">wdrożenie<span class="text-ink-3">.</span></span>
+      </span>
+      <span class="reveal delay-2 hero-word block overflow-hidden">
+        <span class="block font-serif font-normal italic tracking-[-0.025em] text-[clamp(64px,10vw,152px)]">opieka.</span>
+      </span>
+    </h1>
+
+    <!-- sub + CTA -->
+    <div class="reveal delay-3 mt-12 flex flex-wrap items-end justify-between gap-8">
+      <p class="max-w-[380px] font-body text-[17px] leading-[1.55] text-ink-2">
+        Budujemy marki, które mają w sobie coś żywego — energię, odwagę i kierunek. Ty skupiasz się na wizji, my na reszcie.
+      </p>
+      <div class="flex items-center gap-8">
         <LinkUl href="#uslugi" arrow="↓">zobacz usługi</LinkUl>
-        <div class="flex items-center gap-[14px]">
-          <div class="flex [&>span:not(:first-child)]:-ml-2">
-            <span class="h-[38px] w-[38px] rounded-full border-2 border-white bg-[linear-gradient(135deg,#7a6a5a,#3b2f28)] shadow-[0_0_0_1px_rgba(0,0,0,0.05)]"></span>
-            <span class="h-[38px] w-[38px] rounded-full border-2 border-white bg-[linear-gradient(135deg,#c4a48a,#6e5240)] shadow-[0_0_0_1px_rgba(0,0,0,0.05)]"></span>
-            <span class="h-[38px] w-[38px] rounded-full border-2 border-white bg-[linear-gradient(135deg,#9a8a78,#4a3e34)] shadow-[0_0_0_1px_rgba(0,0,0,0.05)]"></span>
-          </div>
-          <div class="font-body text-[13px] leading-[1.35] text-ink-2">
-            <b class="block font-semibold text-ink">90+ Klientów</b>we wspólnocie auraflux
-          </div>
-        </div>
+        <a href="#kontakt" class="font-body text-[14px] text-ink-3 underline-offset-4 hover:text-ink hover:underline transition-colors">
+          porozmawiajmy →
+        </a>
       </div>
     </div>
 
-    <!-- hero visual strip -->
-    <div class="reveal delay-4 mt-14 grid grid-cols-3 gap-4 min-[761px]:grid-cols-[1.8fr_1fr_1fr]">
-      <!-- main photo placeholder -->
-      <div class="relative col-span-3 overflow-hidden rounded-[12px] min-[761px]:col-span-1">
-        <div class="flex h-[280px] w-full items-end bg-[linear-gradient(160deg,#c8b8a8_0%,#7a6455_60%,#2e2218_100%)] p-6 min-[981px]:h-[340px]">
-          <div class="space-y-1">
-            <p class="font-sans text-[11px] font-medium uppercase tracking-widest text-white/60">Michał + Krzysztof</p>
-            <p class="font-serif text-2xl italic text-white">Founders, auraflux</p>
-          </div>
-        </div>
+    <!-- divider stats row -->
+    <div class="reveal delay-4 mt-16 grid grid-cols-3 gap-6 border-t border-line pt-8 min-[761px]:grid-cols-3">
+      <div>
+        <div class="font-sans text-[clamp(28px,3.5vw,46px)] font-medium leading-none tracking-[-0.03em] text-ink count-up" data-target="90">0</div>
+        <div class="mt-2 font-body text-[12px] uppercase tracking-[0.1em] text-ink-3">projektów</div>
       </div>
-      <!-- stat cards -->
-      <div class="flex flex-col justify-between rounded-[12px] border border-line bg-canvas-2 p-6">
-        <span class="font-sans text-[11px] uppercase tracking-widest text-ink-3">projektów</span>
-        <div>
-          <div class="font-sans text-[clamp(42px,6vw,72px)] font-medium leading-none tracking-[-0.04em] text-ink count-up" data-target="90">0</div>
-          <div class="mt-1 font-body text-sm text-ink-3">zrealizowanych marek</div>
-        </div>
+      <div>
+        <div class="font-sans text-[clamp(28px,3.5vw,46px)] font-medium leading-none tracking-[-0.03em] text-ink">5★</div>
+        <div class="mt-2 font-body text-[12px] uppercase tracking-[0.1em] text-ink-3">satysfakcja</div>
       </div>
-      <div class="flex flex-col justify-between rounded-[12px] bg-dark p-6">
-        <span class="font-sans text-[11px] uppercase tracking-widest text-white/40">satysfakcja</span>
-        <div>
-          <div class="font-sans text-[clamp(42px,6vw,72px)] font-medium leading-none tracking-[-0.04em] text-white">5★</div>
-          <div class="mt-1 font-body text-sm text-white/50">średnia ocen klientów</div>
-        </div>
+      <div>
+        <div class="font-sans text-[clamp(28px,3.5vw,46px)] font-medium leading-none tracking-[-0.03em] text-ink">6+</div>
+        <div class="mt-2 font-body text-[12px] uppercase tracking-[0.1em] text-ink-3">lat na rynku</div>
       </div>
+    </div>
+  </div>
+
+  <!-- marquee ticker -->
+  <div class="relative border-t border-line py-5 overflow-hidden">
+    <div class="marquee-track select-none">
+      {['Strategia', 'Branding', 'Strony WWW', 'UX/UI', 'Meta Ads', 'Copywriting', 'Opieka Tech', 'AI First', 'Strategia', 'Branding', 'Strony WWW', 'UX/UI', 'Meta Ads', 'Copywriting', 'Opieka Tech', 'AI First'].map((item) => (
+        <span class="inline-flex items-center gap-6 px-6 font-body text-[13px] uppercase tracking-[0.12em] text-ink-3">
+          {item} <span class="text-[#b48a78]">·</span>
+        </span>
+      ))}
     </div>
   </div>
 </section>

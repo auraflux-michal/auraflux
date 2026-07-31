@@ -115,5 +115,22 @@
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-.marquee-track { animation: marquee 28s linear infinite; }
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 26s linear infinite;
+}
+.marquee-slow { animation-duration: 40s; }
 .marquee-track:hover { animation-play-state: paused; }
+
+/* orb-3 */
+@keyframes orb-drift-3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(30px, -40px) scale(1.06); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+.orb-3 { animation: orb-drift-3 26s ease-in-out infinite; }
+
+/* project card subtle scale on img */
+.project-card img { transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.project-card:hover img { transform: scale(1.04); }

@@ -1,32 +1,42 @@
 ---
 ---
 
-<section id="misja" class="wrap py-20">
-  <p class="mb-6 font-body text-[13px] text-ink-3">misja</p>
+<section id="misja" class="wrap py-28">
+  <p class="mb-12 font-body text-[12px] uppercase tracking-[0.12em] text-ink-3">misja</p>
 
-  <div class="grid items-start gap-[30px] min-[981px]:grid-cols-[1.35fr_0.9fr] min-[981px]:gap-20">
-    <div>
-      <h2 class="reveal m-0 font-sans text-[clamp(40px,5.6vw,76px)] font-medium leading-[1.02] tracking-[-0.035em] text-ink">
-        <span class="text-gradient">Aura</span>, która przyciąga.<br />
-        <span class="text-gradient">Flux</span>, który porywa.
-      </h2>
-    </div>
+  <!-- large editorial headline -->
+  <div class="overflow-hidden">
+    <h2 class="reveal m-0 font-sans text-[clamp(44px,6.2vw,88px)] font-medium leading-[1.0] tracking-[-0.04em] text-ink">
+      <span class="text-gradient">Aura</span>, która przyciąga.<br />
+      <span class="text-gradient">Flux</span>, który porywa.
+    </h2>
+  </div>
 
-    <div class="reveal delay-2 space-y-5 pt-0 font-body text-base leading-[1.6] text-ink-2 min-[981px]:ml-auto min-[981px]:max-w-[380px] min-[981px]:pt-[26px]">
+  <!-- two-column body -->
+  <div class="mt-16 grid items-start gap-10 min-[981px]:grid-cols-2 min-[981px]:gap-24">
+    <div class="reveal delay-1 space-y-5 font-body text-[16px] leading-[1.65] text-ink-2">
       <p>
         <strong class="font-semibold text-ink">Aura</strong> to energia, która zostaje po Tobie, nawet gdy już wyszedłeś.
         <strong class="font-semibold text-ink">Flux</strong> to nieustanny ruch — odwaga, żeby iść dalej, zamiast zostać tam, gdzie wszyscy inni.
       </p>
       <p>
-        Auraflux powstało z przekonania, że najlepsze marki nie płyną z prądem — same go tworzą. Nie idziemy utartymi ścieżkami agencyjnych szablonów. Budujemy marki, które mają w sobie coś żywego — energię, odwagę i kierunek.
+        Auraflux powstało z przekonania, że najlepsze marki nie płyną z prądem — same go tworzą. Nie idziemy utartymi ścieżkami agencyjnych szablonów.
+      </p>
+    </div>
+    <div class="reveal delay-2 space-y-5 font-body text-[16px] leading-[1.65] text-ink-2">
+      <p>
+        Budujemy marki, które mają w sobie coś żywego — energię, odwagę i kierunek. Pracujemy w pełni zdalnie, ale z precyzją i zaangażowaniem jak studio obok.
+      </p>
+      <p>
+        Tworzymy z myślą o ludziach, którzy chcą być zapamiętani — nie tylko zauważeni.
       </p>
     </div>
   </div>
 
   <!-- values pills -->
-  <div class="mt-12 flex flex-wrap gap-3">
+  <div class="mt-14 flex flex-wrap gap-2">
     {['Autentyczność', 'Lekkość działania', 'Energia i ruch', 'Premium bez ego', 'AI First'].map((v, i) => (
-      <span class={`reveal delay-${i + 1} inline-flex items-center rounded-full border border-line px-4 py-2 font-sans text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink`}>
+      <span class={`reveal delay-${i + 1} inline-flex items-center rounded-full border border-line px-5 py-[10px] font-sans text-[13px] text-ink-2 transition-colors hover:border-ink hover:text-ink cursor-default`}>
         {v}
       </span>
     ))}
