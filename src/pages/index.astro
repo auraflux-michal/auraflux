@@ -12,36 +12,86 @@ import FAQ from '../components/FAQ.astro';
 import { safeFetch } from '../lib/sanity';
 
 const query = `*[_type == "homePage"][0]{
-  services[]{num, name, desc, href},
+  services[]{num, name, desc, href, quote},
   testimonial{quote, name, handle},
   faq[]{q, a}
 }`;
 
 const fallback = {
   services: [
-    { num: '01', name: 'Tworzenie brandingu', desc: 'Budujemy marki od podstaw lub odświeżamy istniejące. Strategia, identyfikacja wizualna, komunikacja — spójnie, autentycznie, premium.', href: '/branding' },
-    { num: '02', name: 'Strony internetowe i UX/UI', desc: 'Projektujemy i wdrażamy strony, które oddychają. Minimalistyczny design, intuicyjna funkcjonalność i pełna zgodność z Twoją marką.', href: '/strony-www' },
-    { num: '03', name: 'Opieka technologiczna', desc: 'Hosting, domeny, aktualizacje, bezpieczeństwo — pilnujemy wszystkiego, aby Twój projekt działał bez problemów, a Ty miał spokój i czas na własne pasje.', href: '/opieka-technologiczna' },
-    { num: '04', name: 'Partnerstwo strategiczne', desc: 'Integracja systemów, planowanie projektów i optymalizacja procesów. Twój biznes rozwija się w harmonii z wizją i technologią.', href: '/partnerstwo-strategiczne' },
+    {
+      num: '01',
+      name: 'Strategia',
+      desc: 'Zanim zaprojektujemy cokolwiek, układamy DNA marki: kim jesteś, do kogo mówisz i dokąd zmierzasz. Warsztaty, analiza rynku i konkurencji, mapowanie person klientów — fundament, na którym buduje się wszystko inne.',
+      href: '/partnerstwo-strategiczne',
+      quote: 'Bez kierunku nawet najlepszy design błądzi.',
+    },
+    {
+      num: '02',
+      name: 'Tworzenie brandingu',
+      desc: 'Budujemy tożsamość, która oddaje to, kim naprawdę jesteś — identyfikacja wizualna, ton komunikacji, spójność na każdym punkcie styku z marką. Autentycznie, premium, bez szablonów.',
+      href: '/branding',
+      quote: 'Klienci ufają Ci, zanim jeszcze się odezwiesz.',
+    },
+    {
+      num: '03',
+      name: 'Strony internetowe i UX/UI',
+      desc: 'Strona to nie wizytówka — to maszyna sprzedażowa. Projektujemy pod konwersję: intuicyjna ścieżka użytkownika, szybkość, design w pełnej zgodzie z marką.',
+      href: '/strony-www',
+      quote: 'ROI w leadach zwykle w 3–6 miesięcy.',
+    },
+    {
+      num: '04',
+      name: 'Marketing i widoczność',
+      desc: 'Zapewniamy regularną obecność marki tam, gdzie są Twoi klienci — social media, kampanie Meta Ads, newslettery sprzedażowe. Spójnie, konsekwentnie, z myślą o długim biegu, nie jednorazowym rozbłysku.',
+      href: '/partnerstwo-strategiczne',
+      quote: 'Widoczność, która buduje, nie tylko przyciąga na chwilę.',
+    },
+    {
+      num: '05',
+      name: 'Opieka technologiczna i rozwój',
+      desc: 'Hosting, domeny, aktualizacje, bezpieczeństwo, SSL, backupy, RODO — pilnujemy zaplecza, żeby projekt działał bez przerw. A gdy przychodzi czas na skalowanie: integracje, nowe funkcje, kolejny etap wzrostu.',
+      href: '/opieka-technologiczna',
+      quote: 'Ty się skalujesz, my pilnujemy, żeby nic się nie wysypało.',
+    },
   ],
   testimonial: {
-    quote: 'Z perspektywy czasu mogę również dodać, że współpraca przebiegała znakomicie dzięki profesjonalizmowi, kreatywności, komunikacji i skupieniu zarówno na kliencie, jak i projekcie. Efekt końcowy jest odzwierciedleniem tych cech — dziękuję!',
+    quote: 'Z perspektywy czasu mogę dodać, że współpraca przebiegała znakomicie dzięki profesjonalizmowi, kreatywności i skupieniu na kliencie. Efekt końcowy jest odzwierciedleniem tych cech — dziękuję!',
     name: 'Krzysztof Wnęk',
     handle: '@pozytywnainteligencja',
   },
   faq: [
-    { q: 'Ile kosztuje budowa strony internetowej lub branding?', a: 'Każdy projekt wyceniamy indywidualnie po krótkim brieffie i rozmowie. Strona internetowa zaczyna się od ok. 12 000 zł, kompleksowy branding — od 8 000 zł. Po pierwszej rozmowie wysyłamy konkretny zakres i widełki cenowe.' },
-    { q: 'Jak długo trwa wdrożenie usług, np. strony czy opieki tech?', a: 'Standardowo strona internetowa to 6–10 tygodni, branding 4–6 tygodni, a opiekę techniczną przejmujemy w 5 dni roboczych. Harmonogram zawsze ustalamy razem na start projektu.' },
-    { q: 'Czy obsługujecie tylko duże projekty, czy też małych twórców?', a: 'Pracujemy zarówno ze scale-upami, jak i z jednoosobowymi działalnościami i twórcami. Najważniejsza dla nas jest spójność wizji — wielkość firmy ma znaczenie drugorzędne.' },
-    { q: 'Co z bezpieczeństwem danych i aktualizacjami?', a: 'W ramach opieki technologicznej dbamy o backupy, certyfikaty SSL, aktualizacje CMS-a, monitoring uptime i regularne audyty bezpieczeństwa. Wszystko raportujemy w comiesięcznym podsumowaniu.' },
-    { q: 'Jak mierzycie sukces i generujecie referencje?', a: 'Sukces mierzymy realnymi wskaźnikami — konwersją, ruchem organicznym, czasem na stronie i opinią klientów. Po wdrożeniu prosimy o krótką ankietę NPS i, jeśli zechcesz, referencję wideo.' },
+    {
+      q: 'Ile kosztuje budowa strony internetowej lub branding?',
+      a: 'Każdy projekt wyceniamy indywidualnie po krótkim brieffie i rozmowie. Strona internetowa zaczyna się od ok. 12 000 zł, kompleksowy branding — od 8 000 zł. Po pierwszej rozmowie wysyłamy konkretny zakres i widełki cenowe.',
+    },
+    {
+      q: 'Jak długo trwa wdrożenie usług, np. strony czy opieki tech?',
+      a: 'Standardowo strona internetowa to 6–10 tygodni, branding 4–6 tygodni, a opiekę techniczną przejmujemy w 5 dni roboczych. Harmonogram zawsze ustalamy razem na start projektu.',
+    },
+    {
+      q: 'Czy obsługujecie tylko duże projekty, czy też małych twórców?',
+      a: 'Pracujemy zarówno ze scale-upami, jak i z jednoosobowymi działalnościami i twórcami. Najważniejsza dla nas jest spójność wizji — wielkość firmy ma znaczenie drugorzędne.',
+    },
+    {
+      q: 'Co z bezpieczeństwem danych i aktualizacjami?',
+      a: 'W ramach opieki technologicznej dbamy o backupy, certyfikaty SSL, aktualizacje CMS-a, monitoring uptime i regularne audyty bezpieczeństwa. Wszystko raportujemy w comiesięcznym podsumowaniu.',
+    },
+    {
+      q: 'Jak mierzycie sukces i generujecie referencje?',
+      a: 'Sukces mierzymy realnymi wskaźnikami — konwersją, ruchem organicznym, czasem na stronie i opinią klientów. Po wdrożeniu prosimy o krótką ankietę NPS i, jeśli zechcesz, referencję wideo.',
+    },
   ],
 };
 
 const data = await safeFetch(query, fallback);
 ---
 
-<Layout title="auraflux — design. wdrożenie. opieka." description="auraflux — projektujemy, wdrażamy i opiekujemy się markami, które oddychają i przyciągają klientów." active="start">
+<Layout
+  title="auraflux — design. wdrożenie. opieka."
+  description="Budujemy marki, które mają w sobie coś żywego — energię, odwagę i kierunek. Strategia, branding, strony, marketing i opieka techniczna."
+  active="start"
+>
   <Hero />
   <BrandsStrip />
   <Mission />
@@ -53,7 +103,11 @@ const data = await safeFetch(query, fallback);
     ]}
     row={{ title: 'Ask Spot', sub: '2024 · Chatbot · Landing page', href: '/case-study', bg: '#dad6cd' }}
   />
-  <Testimonial quote={data.testimonial.quote} name={data.testimonial.name} handle={data.testimonial.handle} />
+  <Testimonial
+    quote={data.testimonial.quote}
+    name={data.testimonial.name}
+    handle={data.testimonial.handle}
+  />
   <LeadMagnet
     heading="Zanim zlecisz stronę —"
     headingItalic="12 rzeczy"
@@ -61,6 +115,9 @@ const data = await safeFetch(query, fallback);
     paragraph="Praktyczny PDF, który przeprowadzi Cię przez briefing, budżet i pułapki współpracy z agencją. Oszczędź tygodnie i tysiące złotych jeszcze przed startem projektu."
     bullets={['Checklista briefu na 1 stronę A4', 'Realne widełki budżetów 2026', '7 pytań, które rozbroją każdą agencję']}
   />
-  <ContactSection linkText="Napisz do nas" rest=", a pokażemy, jak odciążyć Cię w technologii i strategii, aby Twój biznes działał bez zakłóceń." />
+  <ContactSection
+    linkText="Napisz do nas"
+    rest=", a pokażemy, jak odciążyć Cię w technologii i strategii, aby Twój biznes działał bez zakłóceń."
+  />
   <FAQ items={data.faq} />
 </Layout>

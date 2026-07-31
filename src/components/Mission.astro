@@ -1,18 +1,34 @@
 ---
-import SectionHeading from './SectionHeading.astro';
 ---
 
 <section id="misja" class="wrap py-20">
+  <p class="mb-6 font-body text-[13px] text-ink-3">misja</p>
+
   <div class="grid items-start gap-[30px] min-[981px]:grid-cols-[1.35fr_0.9fr] min-[981px]:gap-20">
     <div>
-      <SectionHeading eyebrow="misja">
-        Żyjemy naszymi<br />wartościami
-      </SectionHeading>
+      <h2 class="reveal m-0 font-sans text-[clamp(40px,5.6vw,76px)] font-medium leading-[1.02] tracking-[-0.035em] text-ink">
+        <span class="text-gradient">Aura</span>, która przyciąga.<br />
+        <span class="text-gradient">Flux</span>, który porywa.
+      </h2>
     </div>
-    <div class="max-w-none pt-0 font-body text-base leading-[1.6] text-ink-2 min-[981px]:ml-auto min-[981px]:max-w-[360px] min-[981px]:pt-[26px]">
-      Wiele osób ma wspaniałe pomysły, ale nie ogarnia stron, domen, hostingu i strategii. Tu wkraczamy my —
-      <a href="#" class="border-b border-ink font-medium text-ink">auraflux</a>. Jesteśmy partnerem, który odciąży
-      Cię w całym zapleczu technologicznym i strategicznym. Twoja wizja staje się realnym, działającym projektem.
+
+    <div class="reveal delay-2 space-y-5 pt-0 font-body text-base leading-[1.6] text-ink-2 min-[981px]:ml-auto min-[981px]:max-w-[380px] min-[981px]:pt-[26px]">
+      <p>
+        <strong class="font-semibold text-ink">Aura</strong> to energia, która zostaje po Tobie, nawet gdy już wyszedłeś.
+        <strong class="font-semibold text-ink">Flux</strong> to nieustanny ruch — odwaga, żeby iść dalej, zamiast zostać tam, gdzie wszyscy inni.
+      </p>
+      <p>
+        Auraflux powstało z przekonania, że najlepsze marki nie płyną z prądem — same go tworzą. Nie idziemy utartymi ścieżkami agencyjnych szablonów. Budujemy marki, które mają w sobie coś żywego — energię, odwagę i kierunek.
+      </p>
     </div>
+  </div>
+
+  <!-- values pills -->
+  <div class="mt-12 flex flex-wrap gap-3">
+    {['Autentyczność', 'Lekkość działania', 'Energia i ruch', 'Premium bez ego', 'AI First'].map((v, i) => (
+      <span class={`reveal delay-${i + 1} inline-flex items-center rounded-full border border-line px-4 py-2 font-sans text-sm text-ink-2 transition-colors hover:border-ink hover:text-ink`}>
+        {v}
+      </span>
+    ))}
   </div>
 </section>

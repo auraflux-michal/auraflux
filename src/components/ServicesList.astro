@@ -1,11 +1,10 @@
 ---
-import SectionHeading from './SectionHeading.astro';
-
 interface Service {
   num: string;
   name: string;
   desc: string;
   href: string;
+  quote?: string;
 }
 interface Props {
   services: Service[];
@@ -14,17 +13,36 @@ const { services } = Astro.props;
 ---
 
 <section id="uslugi" class="wrap py-20">
-  <SectionHeading eyebrow="usługi">Kreujemy Twój<br />świat technologii</SectionHeading>
+  <p class="mb-6 font-body text-[13px] text-ink-3">usługi</p>
+
+  <div class="grid items-end gap-[30px] min-[981px]:grid-cols-[1.35fr_0.9fr] min-[981px]:gap-20">
+    <h2 class="reveal m-0 font-sans text-[clamp(40px,5.6vw,76px)] font-medium leading-[1.02] tracking-[-0.035em] text-ink">
+      Ty masz wizję.<br />
+      <span class="font-serif font-normal italic">My mamy narzędzia.</span>
+    </h2>
+    <p class="reveal delay-2 max-w-none pb-1 font-body text-base leading-[1.6] text-ink-2 min-[981px]:ml-auto min-[981px]:max-w-[360px]">
+      Wiele osób ma wspaniałe pomysły, ale nie ogarnia stron, marketingu i strategii. Tu wkraczamy my. Odciążymy Cię w całym zapleczu — od kierunku, przez markę, po technologię — żeby Twoja wizja stała się realnym, działającym projektem, nie kolejnym niedokończonym pomysłem w szufladzie.
+    </p>
+  </div>
+
   <div class="mt-14 border-t border-line">
-    {services.map((s) => (
+    {services.map((s, i) => (
       <a
         href={s.href}
-        class="grid grid-cols-[48px_1fr] items-start gap-4 border-b border-line py-[34px] text-inherit transition-[padding] hover:pl-2 min-[981px]:grid-cols-[80px_1fr_1.05fr_24px] min-[981px]:gap-8"
+        class="reveal group grid grid-cols-[48px_1fr] items-start gap-4 border-b border-line py-[34px] text-inherit transition-[padding,background] hover:pl-2 min-[981px]:grid-cols-[80px_1fr_1.05fr_24px] min-[981px]:gap-8"
+        style={`transition-delay:${i * 0.05}s`}
       >
         <div class="pt-[6px] font-body text-sm text-ink-3">{s.num}</div>
-        <div class="font-sans text-2xl font-medium leading-[1.1] tracking-[-0.02em] text-ink min-[981px]:text-[28px]">{s.name}</div>
-        <div class="col-span-2 max-w-[420px] pl-16 font-body text-[15px] leading-[1.55] text-ink-2 min-[981px]:col-span-1 min-[981px]:pl-0">{s.desc}</div>
-        <div class="hidden justify-self-end pt-[6px] text-[22px] leading-none text-ink opacity-50 transition-[opacity,transform] min-[981px]:block">+</div>
+        <div class="font-sans text-2xl font-medium leading-[1.1] tracking-[-0.02em] text-ink transition-colors group-hover:text-ink min-[981px]:text-[28px]">
+          {s.name}
+        </div>
+        <div class="col-span-2 pl-16 min-[981px]:col-span-1 min-[981px]:pl-0">
+          <p class="max-w-[420px] font-body text-[15px] leading-[1.55] text-ink-2">{s.desc}</p>
+          {s.quote && (
+            <span class="service-quote">„{s.quote}"</span>
+          )}
+        </div>
+        <div class="hidden justify-self-end pt-[6px] text-[22px] leading-none text-ink opacity-40 transition-[opacity,transform] duration-300 group-hover:translate-x-1 group-hover:opacity-100 min-[981px]:block">↗</div>
       </a>
     ))}
   </div>

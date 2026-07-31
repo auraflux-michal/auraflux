@@ -46,6 +46,7 @@ const { title, description, active } = Astro.props;
     <Footer />
     <GiantWordmark />
     <script>
+      // smooth scroll
       document.querySelectorAll('a[href*="#"]').forEach((a) => {
         a.addEventListener('click', (e) => {
           const href = a.getAttribute('href') || '';
@@ -62,6 +63,18 @@ const { title, description, active } = Astro.props;
           }
         });
       });
+
+      // scroll-reveal
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-left').forEach((el) => io.observe(el));
     </script>
   </body>
 </html>
