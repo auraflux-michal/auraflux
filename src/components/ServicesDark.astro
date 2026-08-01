@@ -1,0 +1,52 @@
+---
+interface Service {
+  num: string;
+  name: string;
+  desc: string;
+  href: string;
+}
+interface Props {
+  services: Service[];
+}
+const { services } = Astro.props;
+---
+
+<section class="bg-dark py-28">
+  <div class="wrap">
+    <div class="grid items-start gap-16 min-[981px]:grid-cols-[1fr_1fr] min-[981px]:gap-24">
+
+      <!-- left: sticky headline -->
+      <div class="min-[981px]:sticky min-[981px]:top-[100px]">
+        <p class="mb-8 font-body text-[12px] uppercase tracking-[0.12em] text-white/30">usługi</p>
+        <h2 class="reveal m-0 font-sans text-[clamp(40px,5.6vw,72px)] font-medium leading-[1.02] tracking-[-0.04em] text-white">
+          Budujemy marki,<br />które odmawiają<br />
+          <span class="font-serif font-normal italic text-white/60">bycia szablonami.</span>
+        </h2>
+        <p class="reveal delay-2 mt-8 max-w-[340px] font-body text-[15px] leading-[1.65] text-white/40">
+          Odciążamy Cię w całym zapleczu — od kierunku, przez markę, po technologię — żeby Twoja wizja stała się realnym projektem.
+        </p>
+        <a href="#kontakt" class="reveal delay-3 mt-10 inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 font-sans text-[13px] text-white/60 transition-colors hover:border-white/30 hover:text-white">
+          Porozmawiajmy ↗
+        </a>
+      </div>
+
+      <!-- right: service list -->
+      <div class="border-t border-white/[0.08]">
+        {services.map((s, i) => (
+          <a
+            href={s.href}
+            class="reveal group flex items-start justify-between gap-6 border-b border-white/[0.08] py-9 transition-[padding] hover:pl-1"
+            style={`transition-delay:${i * 0.06}s`}
+          >
+            <div>
+              <div class="mb-1 font-body text-[11px] uppercase tracking-[0.1em] text-white/25">{s.num}</div>
+              <div class="font-sans text-[22px] font-medium leading-[1.1] tracking-[-0.02em] text-white min-[981px]:text-[26px]">{s.name}</div>
+              <p class="mt-3 max-w-[360px] font-body text-[14px] leading-[1.6] text-white/40">{s.desc}</p>
+            </div>
+            <span class="shrink-0 pt-1 text-[18px] text-white/20 transition-[color,transform] duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:text-white/70">↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

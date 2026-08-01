@@ -1,19 +1,36 @@
 ---
-interface Stat {
-  n: string;
-  l: string;
-}
-interface Props {
-  stats: Stat[];
-}
-const { stats } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 gap-8 border-y border-line py-[46px] min-[561px]:grid-cols-2 min-[981px]:grid-cols-4 min-[981px]:gap-7">
-  {stats.map((s) => (
-    <div>
-      <div class="font-sans text-[clamp(38px,5vw,60px)] font-medium leading-none tracking-[-0.03em] text-ink">{s.n}</div>
-      <div class="mt-3 max-w-[200px] font-body text-sm text-ink-3">{s.l}</div>
+<section class="border-b border-line py-20">
+  <div class="wrap grid grid-cols-1 gap-12 min-[761px]:grid-cols-3">
+    <div class="reveal">
+      <div class="font-sans text-[clamp(60px,7.5vw,100px)] font-medium leading-none tracking-[-0.04em] text-ink count-up" data-target="90">0</div>
+      <p class="mt-4 max-w-[220px] font-body text-[14px] leading-[1.5] text-ink-3">projektów zrealizowanych dla marek z całej Polski</p>
     </div>
-  ))}
-</div>
+    <div class="reveal delay-1">
+      <div class="font-sans text-[clamp(60px,7.5vw,100px)] font-medium leading-none tracking-[-0.04em] text-ink">5★</div>
+      <p class="mt-4 max-w-[220px] font-body text-[14px] leading-[1.5] text-ink-3">średnia ocen klientów — satysfakcja na każdym etapie</p>
+    </div>
+    <div class="reveal delay-2">
+      <div class="font-sans text-[clamp(60px,7.5vw,100px)] font-medium leading-none tracking-[-0.04em] text-ink">6+</div>
+      <p class="mt-4 max-w-[220px] font-body text-[14px] leading-[1.5] text-ink-3">lat budowania marek, które żyją i sprzedają</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const counters = document.querySelectorAll('.count-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target as HTMLElement;
+      const target = parseInt(el.dataset.target ?? '0', 10);
+      let n = 0;
+      const step = Math.ceil(target / 40);
+      const tick = () => { n = Math.min(n + step, target); el.textContent = n + '+'; if (n < target) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach((c) => io.observe(c));
+</script>

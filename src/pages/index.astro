@@ -2,17 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import BrandsStrip from '../components/BrandsStrip.astro';
-import Mission from '../components/Mission.astro';
-import ServicesList from '../components/ServicesList.astro';
+import StatsRow from '../components/StatsRow.astro';
 import ProjectsGrid from '../components/ProjectsGrid.astro';
-import Testimonial from '../components/Testimonial.astro';
+import ServicesDark from '../components/ServicesDark.astro';
+import TestimonialsGrid from '../components/TestimonialsGrid.astro';
+import Process from '../components/Process.astro';
+import TeamSection from '../components/TeamSection.astro';
 import LeadMagnet from '../components/LeadMagnet.astro';
-import ContactSection from '../components/ContactSection.astro';
 import FAQ from '../components/FAQ.astro';
+import ContactSection from '../components/ContactSection.astro';
 import { safeFetch } from '../lib/sanity';
 
 const query = `*[_type == "homePage"][0]{
-  services[]{num, name, desc, href, quote},
+  services[]{num, name, desc, href},
   testimonial{quote, name, handle},
   faq[]{q, a}
 }`;
@@ -22,37 +24,32 @@ const fallback = {
     {
       num: '01',
       name: 'Strategia',
-      desc: 'Zanim zaprojektujemy cokolwiek, układamy DNA marki: kim jesteś, do kogo mówisz i dokąd zmierzasz. Warsztaty, analiza rynku i konkurencji, mapowanie person klientów — fundament, na którym buduje się wszystko inne.',
+      desc: 'Zanim zaprojektujemy cokolwiek, układamy DNA marki: kim jesteś, do kogo mówisz i dokąd zmierzasz. Warsztaty, analiza rynku i konkurencji, mapowanie person klientów.',
       href: '/partnerstwo-strategiczne',
-      quote: 'Bez kierunku nawet najlepszy design błądzi.',
     },
     {
       num: '02',
       name: 'Tworzenie brandingu',
-      desc: 'Budujemy tożsamość, która oddaje to, kim naprawdę jesteś — identyfikacja wizualna, ton komunikacji, spójność na każdym punkcie styku z marką. Autentycznie, premium, bez szablonów.',
+      desc: 'Budujemy tożsamość, która oddaje to, kim naprawdę jesteś — identyfikacja wizualna, ton komunikacji, spójność na każdym punkcie styku z marką.',
       href: '/branding',
-      quote: 'Klienci ufają Ci, zanim jeszcze się odezwiesz.',
     },
     {
       num: '03',
       name: 'Strony internetowe i UX/UI',
       desc: 'Strona to nie wizytówka — to maszyna sprzedażowa. Projektujemy pod konwersję: intuicyjna ścieżka użytkownika, szybkość, design w pełnej zgodzie z marką.',
       href: '/strony-www',
-      quote: 'ROI w leadach zwykle w 3–6 miesięcy.',
     },
     {
       num: '04',
       name: 'Marketing i widoczność',
-      desc: 'Zapewniamy regularną obecność marki tam, gdzie są Twoi klienci — social media, kampanie Meta Ads, newslettery sprzedażowe. Spójnie, konsekwentnie, z myślą o długim biegu, nie jednorazowym rozbłysku.',
+      desc: 'Regularna obecność marki tam, gdzie są Twoi klienci — social media, kampanie Meta Ads, newslettery sprzedażowe. Spójnie, konsekwentnie, z myślą o długim biegu.',
       href: '/partnerstwo-strategiczne',
-      quote: 'Widoczność, która buduje, nie tylko przyciąga na chwilę.',
     },
     {
       num: '05',
-      name: 'Opieka technologiczna i rozwój',
-      desc: 'Hosting, domeny, aktualizacje, bezpieczeństwo, SSL, backupy, RODO — pilnujemy zaplecza, żeby projekt działał bez przerw. A gdy przychodzi czas na skalowanie: integracje, nowe funkcje, kolejny etap wzrostu.',
+      name: 'Opieka technologiczna',
+      desc: 'Hosting, domeny, aktualizacje, bezpieczeństwo, SSL, backupy, RODO — pilnujemy zaplecza, żeby projekt działał bez przerw. A gdy przychodzi czas na skalowanie: integracje i nowe funkcje.',
       href: '/opieka-technologiczna',
-      quote: 'Ty się skalujesz, my pilnujemy, żeby nic się nie wysypało.',
     },
   ],
   testimonial: {
@@ -94,20 +91,18 @@ const data = await safeFetch(query, fallback);
 >
   <Hero />
   <BrandsStrip />
-  <Mission />
-  <ServicesList services={data.services} />
+  <StatsRow />
   <ProjectsGrid
     tall={[
-      { title: 'Abelard Olza', sub: '2026 · Strategia · strona internetowa', href: '/case-study', bg: '#eeeae3' },
+      { title: 'Abelard Olza', sub: '2026 · Strategia · Strona internetowa', href: '/case-study', bg: '#eeeae3' },
       { title: 'Pozytywna Inteligencja', sub: '2024 · Strategia · Landing page', href: '/case-study', bg: '#bfe3c4' },
     ]}
     row={{ title: 'Ask Spot', sub: '2024 · Chatbot · Landing page', href: '/case-study', bg: '#dad6cd' }}
   />
-  <Testimonial
-    quote={data.testimonial.quote}
-    name={data.testimonial.name}
-    handle={data.testimonial.handle}
-  />
+  <ServicesDark services={data.services} />
+  <TestimonialsGrid main={data.testimonial} />
+  <Process />
+  <TeamSection />
   <LeadMagnet
     heading="Zanim zlecisz stronę —"
     headingItalic="12 rzeczy"
@@ -115,9 +110,9 @@ const data = await safeFetch(query, fallback);
     paragraph="Praktyczny PDF, który przeprowadzi Cię przez briefing, budżet i pułapki współpracy z agencją. Oszczędź tygodnie i tysiące złotych jeszcze przed startem projektu."
     bullets={['Checklista briefu na 1 stronę A4', 'Realne widełki budżetów 2026', '7 pytań, które rozbroją każdą agencję']}
   />
+  <FAQ items={data.faq} />
   <ContactSection
     linkText="Napisz do nas"
-    rest=", a pokażemy, jak odciążyć Cię w technologii i strategii, aby Twój biznes działał bez zakłóceń."
+    rest="Pokażemy, jak odciążyć Cię w technologii i strategii, aby Twój biznes działał bez zakłóceń."
   />
-  <FAQ items={data.faq} />
 </Layout>

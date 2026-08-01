@@ -1,96 +1,80 @@
 ---
-import LinkUl from './LinkUl.astro';
 ---
 
-<section id="start" class="relative flex min-h-[100svh] flex-col overflow-hidden">
-  <!-- animated gradient orbs -->
+<section id="start" class="relative flex min-h-[100svh] flex-col overflow-hidden bg-dark">
+  <!-- subtle noise texture overlay -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 opacity-[0.03]"
+    style="background-image:url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\"); background-size: 180px;">
+  </div>
+  <!-- glow orbs -->
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
-    <div class="orb-1 absolute -left-[30%] top-[-15%] h-[800px] w-[800px] rounded-full bg-[radial-gradient(circle,rgba(180,138,120,0.16)_0%,transparent_65%)]"></div>
-    <div class="orb-2 absolute -right-[20%] top-[20%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(107,91,78,0.12)_0%,transparent_65%)]"></div>
-    <div class="orb-3 absolute bottom-[-10%] left-[30%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(160,120,90,0.08)_0%,transparent_65%)]"></div>
+    <div class="orb-1 absolute -left-[20%] top-[-5%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(180,138,120,0.12)_0%,transparent_65%)]"></div>
+    <div class="orb-2 absolute -right-[10%] bottom-[10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(107,91,78,0.1)_0%,transparent_65%)]"></div>
   </div>
 
-  <!-- main content -->
-  <div class="wrap relative flex flex-1 flex-col justify-center pt-[100px] pb-16">
-    <!-- eyebrow badge -->
-    <div class="reveal mb-10 inline-flex items-center gap-2 self-start">
-      <span class="h-[6px] w-[6px] rounded-full bg-[#b48a78] shadow-[0_0_8px_rgba(180,138,120,0.6)]"></span>
-      <span class="font-body text-[12px] uppercase tracking-[0.15em] text-ink-3">Studio kreatywne · Warszawa</span>
-    </div>
+  <!-- main grid -->
+  <div class="wrap relative flex flex-1 flex-col justify-center py-[120px]">
+    <div class="grid items-start gap-8 min-[981px]:grid-cols-[1fr_360px] min-[981px]:gap-16">
 
-    <!-- headline -->
-    <h1 class="m-0 font-sans font-medium leading-[0.92] tracking-[-0.045em] text-ink">
-      <span class="reveal hero-word block overflow-hidden">
-        <span class="block text-[clamp(68px,10.5vw,158px)]">design<span class="text-ink-3">.</span></span>
-      </span>
-      <span class="reveal delay-1 hero-word block overflow-hidden">
-        <span class="block text-[clamp(68px,10.5vw,158px)]">wdrożenie<span class="text-ink-3">.</span></span>
-      </span>
-      <span class="reveal delay-2 hero-word block overflow-hidden">
-        <span class="block font-serif font-normal italic tracking-[-0.025em] text-[clamp(64px,10vw,152px)]">opieka.</span>
-      </span>
-    </h1>
+      <!-- left: big headline -->
+      <div>
+        <!-- eyebrow -->
+        <div class="reveal mb-10 flex items-center gap-3">
+          <div class="h-[1px] w-10 bg-white/20"></div>
+          <span class="font-body text-[11px] uppercase tracking-[0.2em] text-white/40">Studio kreatywne · Warszawa</span>
+        </div>
 
-    <!-- sub + CTA -->
-    <div class="reveal delay-3 mt-12 flex flex-wrap items-end justify-between gap-8">
-      <p class="max-w-[380px] font-body text-[17px] leading-[1.55] text-ink-2">
-        Budujemy marki, które mają w sobie coś żywego — energię, odwagę i kierunek. Ty skupiasz się na wizji, my na reszcie.
-      </p>
-      <div class="flex items-center gap-8">
-        <LinkUl href="#uslugi" arrow="↓">zobacz usługi</LinkUl>
-        <a href="#kontakt" class="font-body text-[14px] text-ink-3 underline-offset-4 hover:text-ink hover:underline transition-colors">
-          porozmawiajmy →
-        </a>
+        <h1 class="m-0 font-sans font-medium leading-[0.9] tracking-[-0.045em]">
+          <span class="reveal overflow-hidden block">
+            <span class="block text-[clamp(72px,11.5vw,172px)] text-white">design<span class="text-white/25">.</span></span>
+          </span>
+          <span class="reveal delay-1 overflow-hidden block">
+            <span class="block text-[clamp(72px,11.5vw,172px)] text-white">wdrożenie<span class="text-white/25">.</span></span>
+          </span>
+          <span class="reveal delay-2 overflow-hidden block">
+            <span class="block font-serif font-normal italic tracking-[-0.025em] text-[clamp(68px,11vw,165px)] text-white/70">opieka.</span>
+          </span>
+        </h1>
       </div>
-    </div>
 
-    <!-- divider stats row -->
-    <div class="reveal delay-4 mt-16 grid grid-cols-3 gap-6 border-t border-line pt-8 min-[761px]:grid-cols-3">
-      <div>
-        <div class="font-sans text-[clamp(28px,3.5vw,46px)] font-medium leading-none tracking-[-0.03em] text-ink count-up" data-target="90">0</div>
-        <div class="mt-2 font-body text-[12px] uppercase tracking-[0.1em] text-ink-3">projektów</div>
-      </div>
-      <div>
-        <div class="font-sans text-[clamp(28px,3.5vw,46px)] font-medium leading-none tracking-[-0.03em] text-ink">5★</div>
-        <div class="mt-2 font-body text-[12px] uppercase tracking-[0.1em] text-ink-3">satysfakcja</div>
-      </div>
-      <div>
-        <div class="font-sans text-[clamp(28px,3.5vw,46px)] font-medium leading-none tracking-[-0.03em] text-ink">6+</div>
-        <div class="mt-2 font-body text-[12px] uppercase tracking-[0.1em] text-ink-3">lat na rynku</div>
+      <!-- right: desc + CTA -->
+      <div class="reveal delay-3 flex flex-col justify-between gap-10 min-[981px]:pt-[110px]">
+        <p class="font-body text-[16px] leading-[1.6] text-white/55">
+          Budujemy marki, które mają w sobie coś żywego — energię, odwagę i kierunek. Ty skupiasz się na wizji, my pilnujemy reszty.
+        </p>
+
+        <div class="flex flex-col gap-4">
+          <a href="#kontakt" class="inline-flex h-[52px] items-center justify-center gap-2 rounded-full bg-white px-7 font-sans text-[14px] font-semibold text-dark transition-[background,transform] hover:-translate-y-[2px] hover:bg-white/90">
+            Umów konsultację ↗
+          </a>
+          <a href="#uslugi" class="inline-flex h-[52px] items-center justify-center gap-2 rounded-full border border-white/15 px-7 font-sans text-[14px] text-white/60 transition-colors hover:border-white/30 hover:text-white">
+            Zobacz usługi ↓
+          </a>
+        </div>
+
+        <!-- social proof badge -->
+        <div class="flex items-center gap-3 rounded-[10px] border border-white/10 bg-white/[0.04] px-4 py-3">
+          <div class="flex shrink-0 [&>span:not(:first-child)]:-ml-2">
+            <span class="h-8 w-8 rounded-full border border-white/20 bg-[linear-gradient(135deg,#7a6a5a,#3b2f28)]"></span>
+            <span class="h-8 w-8 rounded-full border border-white/20 bg-[linear-gradient(135deg,#c4a48a,#6e5240)]"></span>
+            <span class="h-8 w-8 rounded-full border border-white/20 bg-[linear-gradient(135deg,#9a8a78,#4a3e34)]"></span>
+          </div>
+          <div class="font-body text-[12px] leading-[1.4] text-white/40">
+            <b class="block font-semibold text-white/70">90+ klientów</b>we wspólnocie auraflux
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- marquee ticker -->
-  <div class="relative border-t border-line py-5 overflow-hidden">
+  <!-- bottom marquee -->
+  <div class="relative overflow-hidden border-t border-white/[0.08] py-5">
     <div class="marquee-track select-none">
       {['Strategia', 'Branding', 'Strony WWW', 'UX/UI', 'Meta Ads', 'Copywriting', 'Opieka Tech', 'AI First', 'Strategia', 'Branding', 'Strony WWW', 'UX/UI', 'Meta Ads', 'Copywriting', 'Opieka Tech', 'AI First'].map((item) => (
-        <span class="inline-flex items-center gap-6 px-6 font-body text-[13px] uppercase tracking-[0.12em] text-ink-3">
-          {item} <span class="text-[#b48a78]">·</span>
+        <span class="inline-flex items-center gap-5 px-5 font-body text-[11px] uppercase tracking-[0.14em] text-white/25">
+          {item} <span class="text-[#b48a78]/60">·</span>
         </span>
       ))}
     </div>
   </div>
 </section>
-
-<script>
-  // count-up on first view
-  const counters = document.querySelectorAll('.count-up');
-  const counterIO = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target as HTMLElement;
-      const target = parseInt(el.dataset.target ?? '0', 10);
-      let start = 0;
-      const step = Math.ceil(target / 40);
-      const tick = () => {
-        start = Math.min(start + step, target);
-        el.textContent = start + '+';
-        if (start < target) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-      counterIO.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  counters.forEach((c) => counterIO.observe(c));
-</script>

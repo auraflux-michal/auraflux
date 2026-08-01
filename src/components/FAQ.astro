@@ -9,23 +9,27 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<section class="wrap py-[110px] pb-[90px]">
-  <p class="mb-6 font-body text-[13px] text-ink-3">faq</p>
-  <h2 class="mb-[60px] font-sans text-[clamp(40px,5.6vw,76px)] font-medium leading-[1.02] tracking-[-0.035em] text-ink">
-    Klienci pytają<span class="font-serif font-normal italic">.</span>
-  </h2>
-  <div class="faq-list border-t border-line">
-    {items.map((item) => (
-      <div class="faq-item border-b border-line">
-        <button class="faq-q flex w-full items-center justify-between gap-6 py-[26px] px-1 text-left font-sans text-[17px] font-medium tracking-[-0.005em] text-ink">
-          {item.q}
-          <span class="faq-plus w-[18px] text-center text-[22px] leading-none text-ink transition-transform duration-300">+</span>
-        </button>
-        <div class="faq-a overflow-hidden font-body text-[15px] leading-[1.6] text-ink-2 [max-height:0] transition-[max-height] duration-350">
-          <div class="max-w-[760px] px-1 pb-[26px]">{item.a}</div>
-        </div>
+<section class="py-28">
+  <div class="wrap">
+    <p class="mb-6 font-body text-[12px] uppercase tracking-[0.12em] text-ink-3">faq</p>
+    <div class="grid items-start gap-16 min-[981px]:grid-cols-[1fr_1.2fr]">
+      <h2 class="reveal m-0 font-sans text-[clamp(40px,5.2vw,68px)] font-medium leading-[1.02] tracking-[-0.04em] text-ink">
+        Odpowiedzi<br /><span class="font-serif font-normal italic">na pytania.</span>
+      </h2>
+      <div class="faq-list border-t border-line">
+        {items.map((item) => (
+          <div class="faq-item border-b border-line">
+            <button class="faq-q flex w-full items-center justify-between gap-6 py-6 px-0 text-left font-sans text-[16px] font-medium tracking-[-0.005em] text-ink">
+              {item.q}
+              <span class="faq-plus shrink-0 w-[18px] text-center text-[22px] leading-none text-ink-3 transition-transform duration-300">+</span>
+            </button>
+            <div class="faq-a overflow-hidden font-body text-[15px] leading-[1.65] text-ink-2 [max-height:0] transition-[max-height] duration-350">
+              <div class="max-w-[600px] pb-6">{item.a}</div>
+            </div>
+          </div>
+        ))}
       </div>
-    ))}
+    </div>
   </div>
 </section>
 

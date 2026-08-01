@@ -1,0 +1,37 @@
+---
+---
+
+<section class="bg-dark py-28">
+  <div class="wrap">
+    <div class="mb-16 grid items-start gap-10 min-[981px]:grid-cols-[1fr_1fr] min-[981px]:gap-24">
+      <div>
+        <p class="mb-6 font-body text-[12px] uppercase tracking-[0.12em] text-white/30">proces</p>
+        <h2 class="reveal m-0 font-sans text-[clamp(40px,5.6vw,72px)] font-medium leading-[1.02] tracking-[-0.04em] text-white">
+          Proces stworzony<br />dla szybkości<br />
+          <span class="font-serif font-normal italic text-white/60">i precyzji.</span>
+        </h2>
+      </div>
+      <p class="reveal delay-2 self-end max-w-[380px] font-body text-[15px] leading-[1.65] text-white/40 min-[981px]:pb-2">
+        Od pierwszej rozmowy do live — wiemy, co robimy i kiedy. Żadnych niespodzianek, tylko konkretny plan i terminowe wdrożenie.
+      </p>
+    </div>
+
+    <!-- 4 step cards -->
+    <div class="grid grid-cols-1 gap-4 min-[761px]:grid-cols-2 min-[981px]:grid-cols-4">
+      {[
+        { num: '01', name: 'Odkrycie', desc: 'Brief, analiza rynku i konkurencji, mapowanie person. Poznajemy Cię i Twój cel przed jakimkolwiek działaniem.' },
+        { num: '02', name: 'Strategia', desc: 'DNA marki, pozycjonowanie, ton komunikacji. Fundament, na którym wszystko inne ma sens.' },
+        { num: '03', name: 'Design & Build', desc: 'Identyfikacja wizualna, strona, treści. Budujemy bez szablonów — każdy projekt inny.' },
+        { num: '04', name: 'Launch & Wzrost', desc: 'Wdrożenie, testy, monitoring. A potem — opieka techniczna i marketing, żebyś rósł bez zakłóceń.' },
+      ].map((s, i) => (
+        <div class={`reveal delay-${i + 1} flex flex-col justify-between rounded-[12px] border border-white/[0.08] bg-white/[0.03] p-7 min-h-[260px]`}>
+          <div>
+            <div class="mb-6 font-body text-[11px] uppercase tracking-[0.12em] text-white/25">{s.num}</div>
+            <div class="font-sans text-[22px] font-medium leading-[1.1] tracking-[-0.02em] text-white">{s.name}</div>
+          </div>
+          <p class="font-body text-[13px] leading-[1.6] text-white/40">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
