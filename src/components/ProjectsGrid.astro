@@ -1,6 +1,4 @@
 ---
-import PlaceholderImage from './PlaceholderImage.astro';
-
 interface Project {
   title: string;
   sub: string;
@@ -12,55 +10,51 @@ interface Props {
   row: Project;
 }
 const { tall, row } = Astro.props;
+const all = [...tall, row];
 ---
 
-<section id="projekty" class="py-28">
-  <div class="wrap mb-16 grid items-end gap-6 min-[981px]:grid-cols-[1fr_auto]">
-    <div>
-      <p class="mb-5 font-body text-[12px] uppercase tracking-[0.12em] text-ink-3">projekty</p>
-      <h2 class="reveal m-0 font-sans text-[clamp(40px,5.6vw,76px)] font-medium leading-[1.02] tracking-[-0.035em] text-ink">
-        Ostre projekty,<br /><span class="font-serif font-normal italic">realne efekty.</span>
-      </h2>
-    </div>
-    <a href="/case-study" class="reveal delay-2 hidden items-center gap-2 self-end pb-2 font-body text-[13px] text-ink-3 underline-offset-4 hover:text-ink hover:underline transition-colors min-[761px]:flex">
-      wszystkie projekty →
-    </a>
-  </div>
+<section id="projekty" class="border-b border-line py-28">
+  <div class="wrap">
+    <div class="grid items-start gap-12 min-[981px]:grid-cols-[1fr_1.15fr] min-[981px]:gap-16">
 
-  <!-- magazine grid -->
-  <div class="wrap grid gap-5 min-[761px]:grid-cols-2 min-[981px]:grid-cols-3">
-    <!-- big card spans 2 rows (left col) -->
-    {tall[0] && (
-      <a href={tall[0].href} class="reveal project-card group relative overflow-hidden rounded-[10px] min-[981px]:row-span-2" style={`background:${tall[0].bg}`}>
-        <PlaceholderImage label={`Projekt — ${tall[0].title}`} class="absolute inset-0 h-full w-full border-0 transition-transform duration-700 group-hover:scale-[1.03]" bg={tall[0].bg} />
-        <div class="relative min-h-[280px] min-[981px]:min-h-[560px]"></div>
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-6 pt-12">
-          <div class="font-sans text-[18px] font-medium text-white">{tall[0].title}</div>
-          <div class="mt-1 font-body text-[11px] uppercase tracking-[0.08em] text-white/60">{tall[0].sub}</div>
-        </div>
-        <div class="absolute right-4 top-4 text-[16px] text-white/0 transition-[color,transform] duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:text-white">↗</div>
-      </a>
-    )}
-
-    <!-- right col: two stacked cards -->
-    {tall[1] && (
-      <a href={tall[1].href} class="reveal delay-1 project-card group relative overflow-hidden rounded-[10px]" style={`background:${tall[1].bg}`}>
-        <PlaceholderImage label={`Projekt — ${tall[1].title}`} class="absolute inset-0 h-full w-full border-0 transition-transform duration-700 group-hover:scale-[1.03]" bg={tall[1].bg} />
-        <div class="relative min-h-[260px]"></div>
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent p-5 pt-10">
-          <div class="font-sans text-[17px] font-medium text-white">{tall[1].title}</div>
-          <div class="mt-1 font-body text-[11px] uppercase tracking-[0.08em] text-white/60">{tall[1].sub}</div>
-        </div>
-      </a>
-    )}
-
-    <a href={row.href} class="reveal delay-2 project-card group relative overflow-hidden rounded-[10px]" style={`background:${row.bg}`}>
-      <PlaceholderImage label={`Projekt — ${row.title}`} class="absolute inset-0 h-full w-full border-0 transition-transform duration-700 group-hover:scale-[1.03]" bg={row.bg} />
-      <div class="relative min-h-[260px]"></div>
-      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent p-5 pt-10">
-        <div class="font-sans text-[17px] font-medium text-white">{row.title}</div>
-        <div class="mt-1 font-body text-[11px] uppercase tracking-[0.08em] text-white/60">{row.sub}</div>
+      <!-- LEFT: heading + desc + link — sticky on desktop -->
+      <div class="min-[981px]:sticky min-[981px]:top-[100px]">
+        <p class="mb-6 font-body text-[12px] uppercase tracking-[0.12em] text-ink-3">projekty</p>
+        <h2 class="reveal m-0 font-sans text-[clamp(40px,5.2vw,68px)] font-medium leading-[1.02] tracking-[-0.04em] text-ink">
+          Ostre projekty,<br /><span class="font-serif font-normal italic">realne efekty.</span>
+        </h2>
+        <p class="reveal delay-1 mt-6 max-w-[340px] font-body text-[15px] leading-[1.65] text-ink-2">
+          Każdy projekt zaczyna się od głębokiego zrozumienia marki — i kończy na widocznych wynikach.
+        </p>
+        <a href="/case-study" class="reveal delay-2 mt-8 inline-flex items-center gap-2 font-body text-[13px] text-ink-3 underline-offset-4 hover:text-ink hover:underline transition-colors">
+          wszystkie projekty →
+        </a>
       </div>
-    </a>
+
+      <!-- RIGHT: mosaic grid -->
+      <div class="grid grid-cols-2 gap-4">
+        <!-- big card spans full 2 cols -->
+        <a href={all[0].href} class="reveal col-span-2 project-card group relative overflow-hidden rounded-[10px]" style={`background:${all[0].bg}`}>
+          <div class="relative min-h-[260px] transition-transform duration-700 group-hover:scale-[1.02]"></div>
+          <div class="absolute inset-0 flex flex-col justify-end p-6">
+            <div class="font-sans text-[17px] font-medium text-ink">{all[0].title}</div>
+            <div class="mt-1 font-body text-[11px] uppercase tracking-[0.08em] text-ink-3">{all[0].sub}</div>
+          </div>
+          <div class="absolute right-4 top-4 text-[16px] text-ink/0 transition-[color,transform] duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:text-ink/50">↗</div>
+        </a>
+
+        <!-- two smaller cards side by side -->
+        {all.slice(1).map((p, i) => (
+          <a href={p.href} class={`reveal delay-${i + 1} project-card group relative overflow-hidden rounded-[10px]`} style={`background:${p.bg}`}>
+            <div class="relative min-h-[180px] transition-transform duration-700 group-hover:scale-[1.03]"></div>
+            <div class="absolute inset-0 flex flex-col justify-end p-5">
+              <div class="font-sans text-[14px] font-medium text-ink">{p.title}</div>
+              <div class="mt-0.5 font-body text-[10px] uppercase tracking-[0.08em] text-ink-3">{p.sub}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
   </div>
 </section>

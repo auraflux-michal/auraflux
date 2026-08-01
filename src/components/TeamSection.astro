@@ -1,55 +1,65 @@
 ---
 ---
 
-<section class="py-28">
+<section class="bg-dark py-28">
   <div class="wrap">
-    <div class="grid items-start gap-16 min-[981px]:grid-cols-[1fr_1fr] min-[981px]:gap-24">
-
-      <!-- left -->
+    <div class="mb-16 grid items-end gap-8 min-[981px]:grid-cols-[1fr_auto]">
       <div>
-        <p class="mb-6 font-body text-[12px] uppercase tracking-[0.12em] text-ink-3">zespół</p>
-        <h2 class="reveal m-0 font-sans text-[clamp(40px,5.2vw,68px)] font-medium leading-[1.03] tracking-[-0.04em] text-ink">
-          Kreatywne umysły<br /><span class="font-serif font-normal italic">za auraflux.</span>
+        <p class="mb-5 font-body text-[12px] uppercase tracking-[0.12em] text-white/30">zespół</p>
+        <h2 class="reveal m-0 font-sans text-[clamp(40px,5.2vw,68px)] font-medium leading-[1.02] tracking-[-0.04em] text-white">
+          Kreatywne umysły<br /><span class="font-serif font-normal italic text-white/55">za auraflux.</span>
         </h2>
-        <p class="reveal delay-2 mt-8 max-w-[380px] font-body text-[15px] leading-[1.65] text-ink-2">
-          Michał i Krzysztof — duet, który łączy strategiczne myślenie z wizualną precyzją. Razem budujemy marki, które zapamiętuje się długo po pierwszym spotkaniu.
-        </p>
+      </div>
+      <p class="reveal delay-2 max-w-[320px] self-end font-body text-[14px] leading-[1.65] text-white/40">
+        Duet łączący strategiczne myślenie z wizualną precyzją. Budujemy marki zapamiętywane długo po pierwszym spotkaniu.
+      </p>
+    </div>
 
-        <div class="reveal delay-3 mt-10 flex flex-col gap-3">
-          <div class="flex items-center gap-4 rounded-[10px] border border-line p-5">
-            <div class="h-12 w-12 shrink-0 rounded-full bg-[linear-gradient(135deg,#7a6a5a,#3b2f28)]"></div>
-            <div>
-              <b class="block font-sans text-[15px] font-semibold text-ink">Michał</b>
-              <span class="font-body text-[12px] text-ink-3">Strategia · Branding · UX/UI</span>
-            </div>
-          </div>
-          <div class="flex items-center gap-4 rounded-[10px] border border-line p-5">
-            <div class="h-12 w-12 shrink-0 rounded-full bg-[linear-gradient(135deg,#c4a48a,#6e5240)]"></div>
-            <div>
-              <b class="block font-sans text-[15px] font-semibold text-ink">Krzysztof</b>
-              <span class="font-body text-[12px] text-ink-3">Development · Marketing · Opieka Tech</span>
-            </div>
+    <!-- founder cards — large -->
+    <div class="grid gap-5 min-[761px]:grid-cols-2">
+      <div class="reveal group relative flex h-[440px] flex-col justify-end overflow-hidden rounded-[14px] p-8"
+        style="background: linear-gradient(160deg, #c8b8a8 0%, #8a7060 45%, #2e2218 100%)">
+        <!-- hover overlay -->
+        <div class="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10"></div>
+        <div class="relative space-y-2">
+          <div class="font-sans text-[11px] uppercase tracking-[0.15em] text-white/50">Co-Founder · Strategia & Design</div>
+          <div class="font-serif text-[36px] italic leading-[1.1] text-white">Michał</div>
+          <div class="flex flex-wrap gap-2 pt-1">
+            {['Strategia', 'Branding', 'UX/UI'].map(t => (
+              <span class="rounded-full border border-white/20 px-3 py-1 font-body text-[11px] text-white/60">{t}</span>
+            ))}
           </div>
         </div>
       </div>
 
-      <!-- right: decorative founders card -->
-      <div class="reveal delay-1">
-        <div class="relative flex h-[420px] items-end overflow-hidden rounded-[16px] bg-[linear-gradient(160deg,#c8b8a8_0%,#7a6455_55%,#2e2218_100%)] p-8 min-[981px]:h-[500px]">
-          <!-- subtle pattern -->
-          <div aria-hidden="true" class="absolute inset-0 opacity-10"
-            style="background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.05) 30px, rgba(255,255,255,0.05) 31px);">
-          </div>
-          <div class="relative space-y-2">
-            <div class="flex items-center gap-2">
-              <div class="h-[6px] w-[6px] rounded-full bg-white/60"></div>
-              <span class="font-sans text-[11px] uppercase tracking-widest text-white/60">Michał + Krzysztof</span>
-            </div>
-            <p class="font-serif text-[28px] italic leading-[1.2] text-white">Founders, auraflux</p>
-            <p class="font-body text-[13px] text-white/50">Warszawa · od 2019</p>
+      <div class="reveal delay-1 group relative flex h-[440px] flex-col justify-end overflow-hidden rounded-[14px] p-8"
+        style="background: linear-gradient(160deg, #9a8a78 0%, #4a3e34 50%, #0e0a08 100%)">
+        <div class="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10"></div>
+        <div class="relative space-y-2">
+          <div class="font-sans text-[11px] uppercase tracking-[0.15em] text-white/50">Co-Founder · Tech & Marketing</div>
+          <div class="font-serif text-[36px] italic leading-[1.1] text-white">Krzysztof</div>
+          <div class="flex flex-wrap gap-2 pt-1">
+            {['Development', 'Marketing', 'Opieka Tech'].map(t => (
+              <span class="rounded-full border border-white/20 px-3 py-1 font-body text-[11px] text-white/60">{t}</span>
+            ))}
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- bottom info strip -->
+    <div class="reveal delay-2 mt-5 grid grid-cols-2 gap-5 min-[761px]:grid-cols-4">
+      {[
+        { label: 'Rok założenia', value: '2019' },
+        { label: 'Siedziba', value: 'Warszawa' },
+        { label: 'Projekty', value: '90+' },
+        { label: 'Podejście', value: 'AI First' },
+      ].map((s) => (
+        <div class="rounded-[10px] border border-white/[0.08] bg-white/[0.03] px-5 py-4">
+          <div class="font-body text-[11px] uppercase tracking-[0.08em] text-white/30">{s.label}</div>
+          <div class="mt-2 font-sans text-[20px] font-medium text-white">{s.value}</div>
+        </div>
+      ))}
     </div>
   </div>
 </section>

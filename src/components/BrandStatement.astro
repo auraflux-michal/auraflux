@@ -1,0 +1,48 @@
+---
+---
+
+<section class="border-b border-line py-28">
+  <div class="wrap">
+    <p class="mb-12 font-body text-[12px] uppercase tracking-[0.12em] text-ink-3">dlaczego my</p>
+
+    <!-- Framer-style: "Aesthetics [badge] Innovation" pełna szerokość -->
+    <div class="reveal flex flex-wrap items-center gap-4 min-[981px]:gap-6">
+      <span class="font-sans text-[clamp(48px,7vw,100px)] font-medium leading-none tracking-[-0.04em] text-ink">Aura</span>
+      <span class="inline-flex shrink-0 items-center gap-2 rounded-full border border-line bg-canvas-2 px-5 py-2.5 font-body text-[13px] uppercase tracking-[0.1em] text-ink-3">
+        <span class="h-[5px] w-[5px] rounded-full bg-[#b48a78]"></span>
+        dla marki
+      </span>
+      <span class="font-sans text-[clamp(48px,7vw,100px)] font-medium leading-none tracking-[-0.04em] text-ink">Flux</span>
+      <span class="inline-flex shrink-0 items-center gap-2 rounded-full border border-line bg-canvas-2 px-5 py-2.5 font-body text-[13px] uppercase tracking-[0.1em] text-ink-3">
+        <span class="h-[5px] w-[5px] rounded-full bg-[#7a6455]"></span>
+        dla wzrostu
+      </span>
+    </div>
+
+    <!-- two-col desc -->
+    <div class="mt-14 grid gap-8 border-t border-line pt-10 min-[981px]:grid-cols-2 min-[981px]:gap-20">
+      <div class="reveal delay-1">
+        <h3 class="mb-3 font-sans text-[17px] font-semibold tracking-[-0.01em] text-ink">Design, który buduje marki.</h3>
+        <p class="font-body text-[15px] leading-[1.65] text-ink-2">
+          Łączymy strategiczne myślenie z perfekcją wizualną. Każda decyzja projektowa zakorzeniona jest w celach biznesowych — nie w trendach.
+        </p>
+      </div>
+      <div class="reveal delay-2">
+        <h3 class="mb-3 font-sans text-[17px] font-semibold tracking-[-0.01em] text-ink">Technologia, która nie przeszkadza.</h3>
+        <p class="font-body text-[15px] leading-[1.65] text-ink-2">
+          Szybkie strony, stabilna infrastruktura, brak przestojów. Pilnujemy zaplecza, żebyś Ty mógł skupić się na tym, co naprawdę ważne.
+        </p>
+      </div>
+    </div>
+
+    <!-- stats strip -->
+    <div class="reveal delay-3 mt-10 flex flex-wrap gap-10">
+      {[['90+', 'zrealizowanych projektów'], ['5★', 'satysfakcja klientów'], ['6+', 'lat na rynku'], ['100%', 'praca zdalna']].map(([n, l]) => (
+        <div>
+          <div class="font-sans text-[clamp(30px,3.5vw,46px)] font-medium leading-none tracking-[-0.03em] text-ink">{n}</div>
+          <div class="mt-1.5 font-body text-[13px] text-ink-3">{l}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

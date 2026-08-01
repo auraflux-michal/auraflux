@@ -47,24 +47,24 @@
     @apply mx-auto max-w-[1280px] px-[28px];
   }
 
-  /* ── Scroll reveal ── */
-  .reveal {
+  /* ── Scroll reveal — activated by JS only ── */
+  .js-ready .reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(24px);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .reveal.in-view {
+  .js-ready .reveal.in-view {
     opacity: 1;
     transform: translateY(0);
   }
-  .reveal-left {
+  .js-ready .reveal-left {
     opacity: 0;
-    transform: translateX(-24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(-20px);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .reveal-left.in-view {
+  .js-ready .reveal-left.in-view {
     opacity: 1;
     transform: translateX(0);
   }

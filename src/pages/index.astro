@@ -7,6 +7,7 @@ import ProjectsGrid from '../components/ProjectsGrid.astro';
 import ServicesDark from '../components/ServicesDark.astro';
 import TestimonialsGrid from '../components/TestimonialsGrid.astro';
 import Process from '../components/Process.astro';
+import BrandStatement from '../components/BrandStatement.astro';
 import TeamSection from '../components/TeamSection.astro';
 import LeadMagnet from '../components/LeadMagnet.astro';
 import FAQ from '../components/FAQ.astro';
@@ -21,36 +22,11 @@ const query = `*[_type == "homePage"][0]{
 
 const fallback = {
   services: [
-    {
-      num: '01',
-      name: 'Strategia',
-      desc: 'Zanim zaprojektujemy cokolwiek, układamy DNA marki: kim jesteś, do kogo mówisz i dokąd zmierzasz. Warsztaty, analiza rynku i konkurencji, mapowanie person klientów.',
-      href: '/partnerstwo-strategiczne',
-    },
-    {
-      num: '02',
-      name: 'Tworzenie brandingu',
-      desc: 'Budujemy tożsamość, która oddaje to, kim naprawdę jesteś — identyfikacja wizualna, ton komunikacji, spójność na każdym punkcie styku z marką.',
-      href: '/branding',
-    },
-    {
-      num: '03',
-      name: 'Strony internetowe i UX/UI',
-      desc: 'Strona to nie wizytówka — to maszyna sprzedażowa. Projektujemy pod konwersję: intuicyjna ścieżka użytkownika, szybkość, design w pełnej zgodzie z marką.',
-      href: '/strony-www',
-    },
-    {
-      num: '04',
-      name: 'Marketing i widoczność',
-      desc: 'Regularna obecność marki tam, gdzie są Twoi klienci — social media, kampanie Meta Ads, newslettery sprzedażowe. Spójnie, konsekwentnie, z myślą o długim biegu.',
-      href: '/partnerstwo-strategiczne',
-    },
-    {
-      num: '05',
-      name: 'Opieka technologiczna',
-      desc: 'Hosting, domeny, aktualizacje, bezpieczeństwo, SSL, backupy, RODO — pilnujemy zaplecza, żeby projekt działał bez przerw. A gdy przychodzi czas na skalowanie: integracje i nowe funkcje.',
-      href: '/opieka-technologiczna',
-    },
+    { num: '01', name: 'Strategia', desc: 'Zanim zaprojektujemy cokolwiek, układamy DNA marki: kim jesteś, do kogo mówisz i dokąd zmierzasz. Warsztaty, analiza rynku i konkurencji, mapowanie person klientów.', href: '/partnerstwo-strategiczne' },
+    { num: '02', name: 'Tworzenie brandingu', desc: 'Budujemy tożsamość, która oddaje to, kim naprawdę jesteś — identyfikacja wizualna, ton komunikacji, spójność na każdym punkcie styku z marką.', href: '/branding' },
+    { num: '03', name: 'Strony internetowe i UX/UI', desc: 'Strona to nie wizytówka — to maszyna sprzedażowa. Projektujemy pod konwersję: intuicyjna ścieżka użytkownika, szybkość, design w pełnej zgodzie z marką.', href: '/strony-www' },
+    { num: '04', name: 'Marketing i widoczność', desc: 'Regularna obecność marki tam, gdzie są Twoi klienci — social media, kampanie Meta Ads, newslettery sprzedażowe. Spójnie, konsekwentnie, z myślą o długim biegu.', href: '/partnerstwo-strategiczne' },
+    { num: '05', name: 'Opieka technologiczna', desc: 'Hosting, domeny, aktualizacje, bezpieczeństwo, SSL, backupy, RODO — pilnujemy zaplecza, żeby projekt działał bez przerw. Skalowanie: integracje i nowe funkcje.', href: '/opieka-technologiczna' },
   ],
   testimonial: {
     quote: 'Z perspektywy czasu mogę dodać, że współpraca przebiegała znakomicie dzięki profesjonalizmowi, kreatywności i skupieniu na kliencie. Efekt końcowy jest odzwierciedleniem tych cech — dziękuję!',
@@ -58,26 +34,11 @@ const fallback = {
     handle: '@pozytywnainteligencja',
   },
   faq: [
-    {
-      q: 'Ile kosztuje budowa strony internetowej lub branding?',
-      a: 'Każdy projekt wyceniamy indywidualnie po krótkim brieffie i rozmowie. Strona internetowa zaczyna się od ok. 12 000 zł, kompleksowy branding — od 8 000 zł. Po pierwszej rozmowie wysyłamy konkretny zakres i widełki cenowe.',
-    },
-    {
-      q: 'Jak długo trwa wdrożenie usług, np. strony czy opieki tech?',
-      a: 'Standardowo strona internetowa to 6–10 tygodni, branding 4–6 tygodni, a opiekę techniczną przejmujemy w 5 dni roboczych. Harmonogram zawsze ustalamy razem na start projektu.',
-    },
-    {
-      q: 'Czy obsługujecie tylko duże projekty, czy też małych twórców?',
-      a: 'Pracujemy zarówno ze scale-upami, jak i z jednoosobowymi działalnościami i twórcami. Najważniejsza dla nas jest spójność wizji — wielkość firmy ma znaczenie drugorzędne.',
-    },
-    {
-      q: 'Co z bezpieczeństwem danych i aktualizacjami?',
-      a: 'W ramach opieki technologicznej dbamy o backupy, certyfikaty SSL, aktualizacje CMS-a, monitoring uptime i regularne audyty bezpieczeństwa. Wszystko raportujemy w comiesięcznym podsumowaniu.',
-    },
-    {
-      q: 'Jak mierzycie sukces i generujecie referencje?',
-      a: 'Sukces mierzymy realnymi wskaźnikami — konwersją, ruchem organicznym, czasem na stronie i opinią klientów. Po wdrożeniu prosimy o krótką ankietę NPS i, jeśli zechcesz, referencję wideo.',
-    },
+    { q: 'Ile kosztuje budowa strony internetowej lub branding?', a: 'Każdy projekt wyceniamy indywidualnie po krótkim brieffie i rozmowie. Strona internetowa zaczyna się od ok. 12 000 zł, kompleksowy branding — od 8 000 zł. Po pierwszej rozmowie wysyłamy konkretny zakres i widełki cenowe.' },
+    { q: 'Jak długo trwa wdrożenie usług, np. strony czy opieki tech?', a: 'Standardowo strona internetowa to 6–10 tygodni, branding 4–6 tygodni, a opiekę techniczną przejmujemy w 5 dni roboczych. Harmonogram zawsze ustalamy razem na start projektu.' },
+    { q: 'Czy obsługujecie tylko duże projekty, czy też małych twórców?', a: 'Pracujemy zarówno ze scale-upami, jak i z jednoosobowymi działalnościami i twórcami. Najważniejsza dla nas jest spójność wizji — wielkość firmy ma znaczenie drugorzędne.' },
+    { q: 'Co z bezpieczeństwem danych i aktualizacjami?', a: 'W ramach opieki technologicznej dbamy o backupy, certyfikaty SSL, aktualizacje CMS-a, monitoring uptime i regularne audyty bezpieczeństwa. Wszystko raportujemy w comiesięcznym podsumowaniu.' },
+    { q: 'Jak mierzycie sukces i generujecie referencje?', a: 'Sukces mierzymy realnymi wskaźnikami — konwersją, ruchem organicznym, czasem na stronie i opinią klientów. Po wdrożeniu prosimy o krótką ankietę NPS i, jeśli zechcesz, referencję wideo.' },
   ],
 };
 
@@ -103,6 +64,7 @@ const data = await safeFetch(query, fallback);
   <TestimonialsGrid main={data.testimonial} />
   <Process />
   <TeamSection />
+  <BrandStatement />
   <LeadMagnet
     heading="Zanim zlecisz stronę —"
     headingItalic="12 rzeczy"

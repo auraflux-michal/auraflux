@@ -64,7 +64,9 @@ const { title, description, active } = Astro.props;
         });
       });
 
-      // scroll-reveal
+      // scroll-reveal: mark body ready so CSS activates hidden state
+      document.body.classList.add('js-ready');
+
       const io = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -72,7 +74,7 @@ const { title, description, active } = Astro.props;
             io.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
 
       document.querySelectorAll('.reveal, .reveal-left').forEach((el) => io.observe(el));
     </script>
