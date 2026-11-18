@@ -1,12 +1,13 @@
 import { defineMiddleware } from 'astro:middleware';
 
 // Staging password gate (HTTP Basic Auth).
-// Active on Vercel preview deployments (staging) — production stays open.
+// This Vercel project is the staging site (auraflux-chi.vercel.app), so the gate
+// is on for every Vercel deployment. Local dev stays open.
 // Override the default password with the STAGING_PASSWORD env var.
 const DEFAULT_PASSWORD = 'aura-dbf4567f';
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const isStaging = process.env.VERCEL_ENV === 'preview' || !!process.env.STAGING_PASSWORD;
+  const isStaging = !!process.env.VERCEL || !!process.env.STAGING_PASSWORD;
   if (!isStaging) return next();
   const password = process.env.STAGING_PASSWORD || DEFAULT_PASSWORD;
 
